@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>images/ploshadtreygolnika2.png</file>
+        <file>images/ploshadtreygolnika2formula.png</file>
     </qresource>
 </RCC>
