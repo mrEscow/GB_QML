@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>LabelRect.qml</file>
+        <file>ImageImputRect.qml</file>
+        <file>OutputRect.qml</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>triangle.png</file>
+    </qresource>
+</RCC>
