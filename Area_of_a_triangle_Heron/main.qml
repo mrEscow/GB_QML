@@ -4,8 +4,8 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
 Window {
-    width: 570
-    height: 457
+    width: 400
+    height: 600
     visible: true
     title: qsTr("Area_of_a_triangle_Heron")
 
@@ -138,6 +138,10 @@ Window {
                             top: 100
                         }
                         inputMethodHints: Qt.ImhDigitsOnly
+
+                        Keys.onEnterPressed: calculate()
+                        Keys.onReturnPressed: calculate()
+
                     }
                 }
                 Rectangle {
@@ -179,6 +183,9 @@ Window {
                             bottom: 1
                             top: 100
                         }
+
+                        Keys.onEnterPressed: calculate()
+                        Keys.onReturnPressed: calculate()
                     }
                 }
 
@@ -222,6 +229,9 @@ Window {
                             bottom: 1
                             top: 100
                         }
+
+                        Keys.onEnterPressed: calculate()
+                        Keys.onReturnPressed: calculate()
                     }
                 }
                 Rectangle {
