@@ -13,7 +13,7 @@ Rectangle {
     anchors.verticalCenter: parent.verticalCenter
 
     width: {
-        if(parent.width > 400) return parent.width * 0.6
+        if(parent.width > 500) return parent.width * 0.5
         else return 250
     }
     height: parent.height * 0.7
