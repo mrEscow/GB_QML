@@ -46,14 +46,16 @@ Rectangle {
                 color: textColor
             }
 
-            TextField {
+            TextField  {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: email.bottom
-                width: parent.width * 0.9
+                width: parent.width * 0.8
                 height: parent.height * 4 / 10
                 color: bgColor
                 font.bold: true
                 font.pixelSize: parent.height * 0.2
+                horizontalAlignment : Text.AlignHCenter
+                verticalAlignment : Text.AlignVCenter
                 background: Rectangle {
                     color: componentColor
                 }
@@ -77,14 +79,16 @@ Rectangle {
                 color: textColor
             }
 
-            TextField {
+            TextField  {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: password.bottom
-                width: parent.width * 0.9
+                width: parent.width * 0.8
                 height: parent.height * 4 / 10
                 color: bgColor
                 font.bold: true
                 font.pixelSize: parent.height * 0.2
+                horizontalAlignment : Text.AlignHCenter
+                verticalAlignment : Text.AlignVCenter
                 background: Rectangle {
                     color: componentColor
                 }
@@ -109,14 +113,16 @@ Rectangle {
                 color: textColor
             }
 
-            TextField {
+            TextField  {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: password2.bottom
-                width: parent.width * 0.9
+                width: parent.width * 0.8
                 height: parent.height * 4 / 10
                 color: bgColor
                 font.bold: true
                 font.pixelSize: parent.height * 0.2
+                horizontalAlignment : Text.AlignHCenter
+                verticalAlignment : Text.AlignVCenter
                 background: Rectangle {
                     color: componentColor
                 }
