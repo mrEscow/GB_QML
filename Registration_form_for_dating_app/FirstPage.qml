@@ -158,6 +158,7 @@ Rectangle {
                         x: radioButtonL.leftPadding
                         y: parent.height / 2 - height / 2
                         radius: width / 2
+                        color: componentColor
                         border.color: radioButtonL.down ? "gray" : "gray"
 
                         Rectangle {
@@ -191,6 +192,7 @@ Rectangle {
                         x: radioButtonR.leftPadding
                         y: parent.height / 2 - height / 2
                         radius: width / 2
+                        color: componentColor
                         border.color: radioButtonR.down ? "gray" : "gray"
 
                         Rectangle {

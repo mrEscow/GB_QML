@@ -10,23 +10,29 @@ Rectangle {
     signal leftButtonClicked()
     signal rightButtonClicked()
 
-    anchors.fill: parent
-    anchors.margins: 64
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.verticalCenter: parent.verticalCenter
+
+    width: {
+        if(parent.width > 500) return parent.width * 0.5
+        else return 250
+    }
+    height: parent.height * 0.7
+    implicitWidth: 300
     radius: 20
     color: mainBubbleColor
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: 10
-        anchors.leftMargin: 30
-        anchors.rightMargin: 30
-        spacing: 2
+        anchors.margins: parent.height * 0.03
+        anchors.leftMargin: parent.width * 0.1
+        anchors.rightMargin: parent.width * 0.1
+        spacing: parent.height * 0.02
 
-        // Email
         Rectangle {
             Layout.alignment: Qt.AlignCenter
+            Layout.fillWidth: true
             Layout.fillHeight: true
-            width: bubbleWidth
             radius: 15
             color: secondBubbleColor
 
@@ -47,18 +53,17 @@ Rectangle {
                 height: parent.height * 4 / 10
                 color: bgColor
                 font.bold: true
-                font.pixelSize: 24
+                font.pixelSize: parent.height * 0.2
                 background: Rectangle {
                     color: componentColor
                 }
             }
         }
 
-        // Пароль
         Rectangle {
             Layout.alignment: Qt.AlignCenter
+            Layout.fillWidth: true
             Layout.fillHeight: true
-            width: bubbleWidth
             radius: 15
             color: secondBubbleColor
 
@@ -79,18 +84,18 @@ Rectangle {
                 height: parent.height * 4 / 10
                 color: bgColor
                 font.bold: true
-                font.pixelSize: 24
+                font.pixelSize: parent.height * 0.2
                 background: Rectangle {
                     color: componentColor
                 }
             }
         }
 
-        // Пароль2
+
         Rectangle {
             Layout.alignment: Qt.AlignCenter
+            Layout.fillWidth: true
             Layout.fillHeight: true
-            width: bubbleWidth
             radius: 15
             color: secondBubbleColor
 
@@ -111,7 +116,7 @@ Rectangle {
                 height: parent.height * 4 / 10
                 color: bgColor
                 font.bold: true
-                font.pixelSize: 24
+                font.pixelSize: parent.height * 0.2
                 background: Rectangle {
                     color: componentColor
                 }
@@ -120,9 +125,8 @@ Rectangle {
 
         Rectangle {
             Layout.alignment: Qt.AlignCenter
+            Layout.fillWidth: true
             Layout.fillHeight: true
-
-            width: bubbleWidth
             radius: 15
             color: "transparent"
 

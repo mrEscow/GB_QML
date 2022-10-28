@@ -110,7 +110,7 @@ Window {
             id: endPage
             visible: false
             leftButtonName: "Вернуться   "
-            rightButtonName: " Продолжить"
+            rightButtonName: " Зарегистрироваться"
             onLeftButtonClicked: {
                 stackView.pop()
             }
