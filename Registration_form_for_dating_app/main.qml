@@ -20,6 +20,53 @@ Window {
 
     property real bubbleWidth: 250
 
+    function printUser(user){
+        console.log(user.id);
+        console.log(user.mail);
+        console.log(user.password);
+
+        console.log(user.userDate.name);
+        console.log(user.userDate.age);
+        console.log(user.userDate.gender);
+        console.log(user.userDate.country);
+        console.log(user.userDate.sity);
+        console.log(user.userDate.about);
+
+        console.log(user.userDate.preferred.gender);
+        console.log(user.userDate.preferred.minAge);
+        console.log(user.userDate.preferred.maxAge);
+    }
+
+    function createUser(){
+        var JsonString =
+        '{
+            "id": "1",
+            "mail": "name@mail.ru",
+            "password": "password",
+            "userDate":
+            {
+              "name": "name",
+              "age": "18",
+              "gender": "gender",
+              "country": "country",
+              "sity": "sity",
+              "about": "about",
+              "preferred":
+                {
+                    "gender": "gender",
+                    "minAge": "18",
+                    "maxAge": "120"
+                }
+            }
+        }';
+
+        var user = JSON.parse(JsonString);
+
+        printUser(user);
+    }
+
+    Component.onCompleted: createUser()
+
     Rectangle {
         anchors.fill: parent
         color: bgColor
@@ -38,7 +85,7 @@ Window {
         StackView {
             id: stackView
             anchors.fill: parent
-            initialItem: fifthPage
+            initialItem: firstPage
         }
 
         FirstPage {

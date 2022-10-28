@@ -188,7 +188,7 @@ Rectangle {
             Layout.preferredHeight: 1
 
             Text {
-                id: sex
+                id: gender
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "Пол партнера"
                 font.bold: true
@@ -199,7 +199,7 @@ Rectangle {
 
             RowLayout {
                 anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: sex.bottom
+                anchors.top: gender.bottom
                 anchors.topMargin: 5
                 width: parent.width * 0.9
                 height: parent.height * 4 / 10
