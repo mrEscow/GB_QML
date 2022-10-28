@@ -12,24 +12,30 @@ Rectangle {
     signal rightButtonClicked()
 
 
-    anchors.fill: parent
-    anchors.margins: 64
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.verticalCenter: parent.verticalCenter
+
+    width: {
+        if(parent.width > 500) return parent.width * 0.5
+        else return 250
+    }
+    height: parent.height * 0.7
+    implicitWidth: 300
     radius: 20
     color: mainBubbleColor
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: 10
-        anchors.leftMargin: 30
-        anchors.rightMargin: 30
-        spacing: 2
+        anchors.margins: parent.height * 0.03
+        anchors.leftMargin: parent.width * 0.1
+        anchors.rightMargin: parent.width * 0.1
+        spacing: parent.height * 0.02
 
 
         Rectangle {
             Layout.alignment: Qt.AlignCenter
+            Layout.fillWidth: true
             Layout.fillHeight: true
-
-            width: bubbleWidth
             radius: 15
             color: secondBubbleColor
 
@@ -60,13 +66,13 @@ Rectangle {
 
         Rectangle {
             Layout.alignment: Qt.AlignCenter
+            Layout.fillWidth: true
             Layout.fillHeight: true
-            width: bubbleWidth
             radius: 15
             color: secondBubbleColor
 
             Text {
-                id: toun
+                id: city
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "Ваш город"
                 font.bold: true
@@ -76,7 +82,7 @@ Rectangle {
             }
             TextField {
                 anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: toun.bottom
+                anchors.top: city.bottom
                 width: parent.width * 0.9
                 height: parent.height * 4 / 10
                 color: bgColor
@@ -91,8 +97,8 @@ Rectangle {
 
         Rectangle {
             Layout.alignment: Qt.AlignCenter
+            Layout.fillWidth: true
             Layout.fillHeight: true
-            width: bubbleWidth
             radius: 15
             color: "transparent"
         }
@@ -100,85 +106,14 @@ Rectangle {
 
         Rectangle {
             Layout.alignment: Qt.AlignCenter
+            Layout.fillWidth: true
             Layout.fillHeight: true
-            width: bubbleWidth
             radius: 15
             color: "transparent"
 
         }
 
-        // Кнопки
-        Rectangle {
-            Layout.alignment: Qt.AlignCenter
-            Layout.fillHeight: true
-            width: bubbleWidth
-            radius: 15
-            color: secondBubbleColor
 
-            Rectangle {
-                id: bottonsAria
-                anchors.fill: parent
-                color: secondBubbleColor
-                anchors.margins: 15
-                radius: 10
-
-                Row {
-                    anchors.fill: parent
-                    Rectangle {
-                        width: bottonsAria.width / 2
-                        height: bottonsAria.height
-                        radius: bottonsAria.radius
-                        color: buttonsColor
-                        Text {
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.bold: true
-                            font.pixelSize: parent.height / 3
-                            color: buttonTextColor
-                            text: leftButtonName + "  "
-                        }
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: leftButtonClicked()
-                        }
-                    }
-
-                    Rectangle {
-                        width: bottonsAria.width / 2
-                        height: bottonsAria.height
-                        radius: bottonsAria.radius
-                        color: buttonsColor
-                        Text {
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.bold: true
-                            font.pixelSize: parent.height / 3
-                            color: buttonTextColor
-                            text: "  " + rightButtonName
-                        }
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: rightButtonClicked()
-                        }
-                    }
-                }
-                Rectangle {
-                    width: 40
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    height: bottonsAria.height
-                    color: secondBubbleColor
-                    Text {
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        anchors.verticalCenter: parent.verticalCenter
-                        font.bold: true
-                        font.pixelSize: parent.height / 2
-                        color: textColor
-                        text: "< >"
-                    }
-                }
-
-            }
-        }
-
+        DownButtons {}
     }
 }

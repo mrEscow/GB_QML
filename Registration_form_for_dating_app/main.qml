@@ -115,7 +115,7 @@ Window {
                 stackView.pop()
             }
             onRightButtonClicked: {
-                //stackView.push(threedPage)
+                stackView.pop(null)
             }
         }
 

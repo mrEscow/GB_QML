@@ -94,9 +94,9 @@ Rectangle {
                     id: handleId
                     x: slider.visualPosition * (slider.width - width)
                     y: (slider.height - height) / 2
-                    width: parent.width * 0.05
-                    height: parent.width * 0.05
-                    radius: (parent.width * 0.05) / 2
+                    width: parent.width * 0.06
+                    height: parent.width * 0.06
+                    radius: height / 2
                     color: "gray"
                 }
                 background: Rectangle {
@@ -215,72 +215,6 @@ Rectangle {
             color: "transparent"
         }
 
-        // Кнопки
-        Rectangle {
-            Layout.alignment: Qt.AlignCenter
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            //width: bubbleWidth
-            radius: 15
-            color: secondBubbleColor
-
-            Rectangle {
-                id: bottonsAria
-                anchors.fill: parent
-                color: secondBubbleColor
-                anchors.margins: parent.height * 0.1
-                radius: 10
-
-                Row {
-                    anchors.fill: parent
-                    Rectangle {
-                        width: bottonsAria.width / 2
-                        height: bottonsAria.height
-                        radius: bottonsAria.radius
-                        color: buttonsColor
-                        Text {
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.bold: true
-                            font.pixelSize: parent.height / 5
-                            color: buttonTextColor
-                            text: leftButtonName + "   "
-                        }
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: leftButtonClicked()
-                        }
-                    }
-
-                    Rectangle {
-                        width: bottonsAria.width / 2
-                        height: bottonsAria.height
-                        radius: bottonsAria.radius
-                        color: buttonsColor
-                        Text {
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.bold: true
-                            font.pixelSize: parent.height / 5
-                            color: buttonTextColor
-                            text: "   " + rightButtonName
-                        }
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: rightButtonClicked()
-                        }
-                    }
-                }
-                Rectangle {
-                    width: parent.width * 0.1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    height: bottonsAria.height
-                    color: secondBubbleColor
-                    MouseArea {
-                        anchors.fill: parent
-                    }
-                }
-            }
-        }
+        DownButtons {}
     }
 }
