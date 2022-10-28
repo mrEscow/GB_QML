@@ -48,134 +48,134 @@ Rectangle {
                 color: textColor
             }
 
-                        RowLayout {
-                            id: upLayout
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            anchors.top: country.bottom
-                            anchors.topMargin: 10
-                            width: parent.width * 0.9
-                            height: parent.height * 0.2
+            RowLayout {
+                id: upLayout
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: country.bottom
+                anchors.topMargin: 10
+                width: parent.width * 0.9
+                height: parent.height * 0.2
 
-                            Text {
-                                id: upTextL
-                                //Layout.fillWidth: true
-                                Layout.fillHeight: true
-                                Layout.preferredHeight: 1
-                                font: country.font
-                                color: textColor
-                                text: "от "
-                            }
+                Text {
+                    id: upTextL
+                    //Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Layout.preferredHeight: 1
+                    font: country.font
+                    color: textColor
+                    text: "от "
+                }
 
-                            Slider {
-                                id: upSlider
-                                Layout.fillWidth: true
-                                Layout.fillHeight: true
-                                Layout.preferredHeight: 4
-                                from: 18
-                                to: 120
-                                stepSize: 1
-                                font.bold: true
-                                font.pixelSize: 24
+                Slider {
+                    id: upSlider
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Layout.preferredHeight: 4
+                    from: 18
+                    to: downSlider.value
+                    stepSize: 1
+                    font.bold: true
+                    font.pixelSize: 24
 
-                                handle: Rectangle {
-                                    x: upSlider.visualPosition * (upSlider.width - width)
-                                    y: (upSlider.height - height) / 2
-                                    width: parent.width * 0.08
-                                    height: parent.width * 0.08
-                                    radius: height / 2
-                                    color: "gray"
-                                }
+                    handle: Rectangle {
+                        x: upSlider.visualPosition * (upSlider.width - width)
+                        y: (upSlider.height - height) / 2
+                        width: parent.width * 0.08
+                        height: parent.width * 0.08
+                        radius: height / 2
+                        color: "gray"
+                    }
 
-                                background: Rectangle {
-                                    y: (upSlider.height - height) / 2
-                                    height: parent.height * 0.3
-                                    radius: height / 2
-                                    color: componentColor
+                    background: Rectangle {
+                        y: (upSlider.height - height) / 2
+                        height: parent.height * 0.3
+                        radius: height / 2
+                        color: componentColor
 
-                                    Rectangle {
-                                        width: upSlider.visualPosition * parent.width
-                                        height: parent.height
-                                        color: Qt.darker(componentColor)
-                                        radius: height / 2
-                                    }
-                                }
-                            }
-
-
-                            Text {
-                                id: upTextR
-                                Layout.fillHeight: true
-                                Layout.preferredHeight: 1
-                                font: country.font
-                                color: textColor
-                                text:  upSlider.value
-                            }
+                        Rectangle {
+                            width: upSlider.visualPosition * parent.width
+                            height: parent.height
+                            color: Qt.darker(componentColor)
+                            radius: height / 2
                         }
+                    }
+                }
 
 
-                        RowLayout {
-                            id: downLayout
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            anchors.top: upLayout.bottom
-                            anchors.topMargin: 10
-                            width: parent.width * 0.9
-                            height: parent.height * 0.2
-
-                            Text {
-                                id: downTextL
-                                Layout.fillHeight: true
-                                Layout.preferredHeight: 1
-                                font: country.font
-                                color: textColor
-                                text: "до "
-                            }
-
-                            Slider {
-                                id: downSlider
-                                Layout.fillWidth: true
-                                Layout.fillHeight: true
-                                Layout.preferredHeight: 5
-                                from: 18
-                                to: 120
-                                value: 120
-                                stepSize: 1
-                                font.bold: true
-                                font.pixelSize: 24
-
-                                handle: Rectangle {
-                                    x: downSlider.visualPosition * (downSlider.width - width)
-                                    y: (downSlider.height - height) / 2
-                                    width: parent.width * 0.08
-                                    height: parent.width * 0.08
-                                    radius: height / 2
-                                    color: "gray"
-                                }
-
-                                background: Rectangle {
-                                    y: (downSlider.height - height) / 2
-                                    height: parent.height * 0.3
-                                    radius: height / 2
-                                    color: componentColor
-
-                                    Rectangle {
-                                        width: downSlider.visualPosition * parent.width
-                                        height: parent.height
-                                        color: Qt.darker(componentColor)
-                                        radius: height / 2
-                                    }
-                                }
-                            }
+                Text {
+                    id: upTextR
+                    Layout.fillHeight: true
+                    Layout.preferredHeight: 1
+                    font: country.font
+                    color: textColor
+                    text:  upSlider.value
+                }
+            }
 
 
-                            Text {
-                                id: downTextR
-                                Layout.fillHeight: true
-                                Layout.preferredHeight: 1
-                                font: country.font
-                                color: textColor
-                                text:  downSlider.value
-                            }
+            RowLayout {
+                id: downLayout
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: upLayout.bottom
+                anchors.topMargin: 10
+                width: parent.width * 0.9
+                height: parent.height * 0.2
+
+                Text {
+                    id: downTextL
+                    Layout.fillHeight: true
+                    Layout.preferredHeight: 1
+                    font: country.font
+                    color: textColor
+                    text: "до "
+                }
+
+                Slider {
+                    id: downSlider
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Layout.preferredHeight: 5
+                    from: upSlider.value
+                    to: 120
+                    value: 120
+                    stepSize: 1
+                    font.bold: true
+                    font.pixelSize: 24
+
+                    handle: Rectangle {
+                        x: downSlider.visualPosition * (downSlider.width - width)
+                        y: (downSlider.height - height) / 2
+                        width: parent.width * 0.08
+                        height: parent.width * 0.08
+                        radius: height / 2
+                        color: "gray"
+                    }
+
+                    background: Rectangle {
+                        y: (downSlider.height - height) / 2
+                        height: parent.height * 0.3
+                        radius: height / 2
+                        color: componentColor
+
+                        Rectangle {
+                            width: downSlider.visualPosition * parent.width
+                            height: parent.height
+                            color: Qt.darker(componentColor)
+                            radius: height / 2
                         }
+                    }
+                }
+
+
+                Text {
+                    id: downTextR
+                    Layout.fillHeight: true
+                    Layout.preferredHeight: 1
+                    font: country.font
+                    color: textColor
+                    text:  downSlider.value
+                }
+            }
         }
 
         ////////////////////////////////////////////////
