@@ -4,7 +4,8 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
 Rectangle {
-    id: fourthPage
+    property alias userAbout: textAbout.text
+
     property string leftButtonName: "left"
     property string rightButtonName: "right"
     signal leftButtonClicked()
@@ -54,6 +55,7 @@ Rectangle {
                 color: componentColor
 
                 TextInput  {
+                    id: textAbout
                     anchors.fill: parent
                     color: bgColor
                     font.bold: true

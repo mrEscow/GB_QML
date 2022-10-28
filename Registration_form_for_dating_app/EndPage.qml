@@ -4,9 +4,12 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
 Rectangle {
-    id: endPage
+    property alias email: textEmail.text
+    property alias password: textPassportOne.text
+
     property string leftButtonName: "left"
     property string rightButtonName: "right"
+
     signal leftButtonClicked()
     signal rightButtonClicked()
 
@@ -47,6 +50,7 @@ Rectangle {
             }
 
             TextField  {
+                id: textEmail
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: email.bottom
                 width: parent.width * 0.8
@@ -80,6 +84,7 @@ Rectangle {
             }
 
             TextField  {
+                id: textPassportOne
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: password.bottom
                 width: parent.width * 0.8
@@ -114,6 +119,7 @@ Rectangle {
             }
 
             TextField  {
+                id: textPassportTwo
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: password2.bottom
                 width: parent.width * 0.8

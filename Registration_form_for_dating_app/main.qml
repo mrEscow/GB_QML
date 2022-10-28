@@ -5,7 +5,6 @@ import QtQuick.Controls 2.15
 
 Window {
     width: 640
-    //minimumWidth: 450
     height: 480
     visible: true
     title: qsTr("Registration form")
@@ -18,54 +17,78 @@ Window {
     readonly property color buttonsColor: "#5FBEC4"
     readonly property color buttonTextColor: "#466F72"
 
-    property real bubbleWidth: 250
+    property string _email
+    property string _password
+    property string _userName
+    property int _userAge
+    property string _userGender
+    property string _userCountry
+    property string _userCity
+    property string _userEducation
+    property string _userHobby
+    property string _userAbout
+    property string _preferredGander
+    property int _preferredMinAge
+    property int _preferredManAge
+
+    function clenDate(){
+        _email = ""
+        _password = ""
+        _userName = ""
+        _userAge = 0
+        _userGender = ""
+        _userCountry = ""
+        _userCity = ""
+        _userEducation = ""
+        _userHobby = ""
+        _userAbout = ""
+        _preferredGander = ""
+        _preferredMinAge = 0
+        _preferredManAge = 0
+    }
 
     function printUser(user){
+        console.log("==============");
         console.log(user.id);
         console.log(user.mail);
         console.log(user.password);
-
         console.log(user.userDate.name);
         console.log(user.userDate.age);
         console.log(user.userDate.gender);
         console.log(user.userDate.country);
         console.log(user.userDate.sity);
+        console.log(user.userDate.education);
+        console.log(user.userDate.hobby);
         console.log(user.userDate.about);
-
         console.log(user.userDate.preferred.gender);
         console.log(user.userDate.preferred.minAge);
         console.log(user.userDate.preferred.maxAge);
+        console.log("**************");
     }
 
     function createUser(){
-        var JsonString =
-        '{
-            "id": "1",
-            "mail": "name@mail.ru",
-            "password": "password",
-            "userDate":
-            {
-              "name": "name",
-              "age": "18",
-              "gender": "gender",
-              "country": "country",
-              "sity": "sity",
-              "about": "about",
-              "preferred":
-                {
-                    "gender": "gender",
-                    "minAge": "18",
-                    "maxAge": "120"
+        var user = {
+            id : 1,
+            mail: _email,
+            password: _password,
+            userDate: {
+                name: _userName,
+                age: _userAge,
+                gender: _userGender,
+                country: _userCountry,
+                sity: _userCity,
+                education: _userEducation,
+                hobby: _userHobby,
+                about: _userAbout,
+                preferred: {
+                    gender: _preferredGander,
+                    minAge: _preferredMinAge,
+                    maxAge:  _preferredManAge
                 }
             }
-        }';
-
-        var user = JSON.parse(JsonString);
-
-        printUser(user);
+        }
+        return user;
     }
-
-    Component.onCompleted: createUser()
 
     Rectangle {
         anchors.fill: parent
@@ -97,7 +120,15 @@ Window {
                 close();
             }
             onRightButtonClicked: {
-                stackView.push(secondPage)
+                _userName = userName;
+                _userAge = userAge
+                _userGender = userGender
+
+                console.log(_userName)
+                console.log(_userAge)
+                console.log(_userGender)
+
+                stackView.push(secondPage);
             }
         }
 
@@ -110,6 +141,12 @@ Window {
                 stackView.pop()
             }
             onRightButtonClicked: {
+                _userCountry = userCountry
+                _userCity = userCity
+
+                console.log(_userCountry)
+                console.log(_userCity)
+
                 stackView.push(thirdPage)
             }
         }
@@ -123,6 +160,12 @@ Window {
                 stackView.pop()
             }
             onRightButtonClicked: {
+                _userEducation =  userEducation
+                _userHobby = userHobby
+
+                console.log(_userEducation)
+                console.log(_userHobby)
+
                 stackView.push(fourthPage)
             }
         }
@@ -136,6 +179,10 @@ Window {
                 stackView.pop()
             }
             onRightButtonClicked: {
+                _userAbout = userAbout
+
+                console.log(_userAbout)
+
                 stackView.push(fifthPage)
             }
         }
@@ -149,6 +196,14 @@ Window {
                 stackView.pop()
             }
             onRightButtonClicked: {
+                _preferredGander = preferredGander;
+                _preferredMinAge = preferredMinAge
+                _preferredManAge = preferredManAge
+
+                console.log(_preferredGander)
+                console.log(_preferredMinAge)
+                console.log(_preferredManAge)
+
                 stackView.push(endPage)
             }
         }
@@ -162,10 +217,18 @@ Window {
                 stackView.pop()
             }
             onRightButtonClicked: {
+                _email = email
+                _password = password
+
+                console.log(_email)
+                console.log(_password)
+
+                var newUser = createUser()
+                printUser(newUser);
+                clenDate()
+
                 stackView.pop(null)
             }
         }
-
-
     }
 }

@@ -4,7 +4,8 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
 Rectangle {
-    id: secondPage
+    property alias userCountry: comboBox.currentText
+    property alias userCity: nameCity.text
 
     property string leftButtonName: "left"
     property string rightButtonName: "right"
@@ -101,6 +102,7 @@ Rectangle {
                 color: textColor
             }
             TextField {
+                id: nameCity
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: city.bottom
                 width: parent.width * 0.8

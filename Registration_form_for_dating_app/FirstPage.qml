@@ -4,6 +4,13 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
 Rectangle {
+    property alias userName: userName.text
+    property alias userAge: slider.value
+    property string userGender: {
+        if(radioButtonL.checked) return "M"
+        else if(radioButtonR.checked) return "Ж"
+        else return "М/Ж"
+    }
     property string leftButtonName: "left"
     property string rightButtonName: "right"
     signal leftButtonClicked()
@@ -47,6 +54,7 @@ Rectangle {
             }
 
             TextField  {
+                id: userName
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: name.bottom
                 width: parent.width * 0.8

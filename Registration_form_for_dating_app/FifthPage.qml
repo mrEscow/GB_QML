@@ -4,7 +4,14 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
 Rectangle {
-    id: fifthPage
+    property string preferredGander: {
+        if(radioButtonL.checked) return "M"
+        else if(radioButtonR.checked) return "Ж"
+        else return "М/Ж"
+    }
+    property alias preferredMinAge: upSlider.value
+    property alias preferredManAge: downSlider.value
+
     property string leftButtonName: "left"
     property string rightButtonName: "right"
     signal leftButtonClicked()
@@ -178,7 +185,6 @@ Rectangle {
             }
         }
 
-        ////////////////////////////////////////////////
         Rectangle {
             Layout.alignment: Qt.AlignCenter
             Layout.fillWidth: true
