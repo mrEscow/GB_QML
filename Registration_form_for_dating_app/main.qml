@@ -38,12 +38,12 @@ Window {
         StackView {
             id: stackView
             anchors.fill: parent
-            initialItem: firstPage
+            initialItem: fifthPage
         }
 
         FirstPage {
             id: firstPage
-
+            visible: false
             leftButtonName: "Выход   "
             rightButtonName: " Продолжить"
             onLeftButtonClicked: {

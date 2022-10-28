@@ -43,16 +43,19 @@ Rectangle {
                 font.italic: true
                 font.pixelSize: parent.height * 0.3
                 color: textColor
+
             }
 
-            TextField {
+            TextField  {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: name.bottom
-                width: parent.width * 0.9
+                width: parent.width * 0.8
                 height: parent.height * 4 / 10
                 color: bgColor
                 font.bold: true
                 font.pixelSize: parent.height * 0.2
+                horizontalAlignment : Text.AlignHCenter
+                verticalAlignment : Text.AlignVCenter
                 background: Rectangle {
                     color: componentColor
                 }
@@ -78,7 +81,6 @@ Rectangle {
 
             Slider {
                 id: slider
-
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: age.bottom
                 anchors.topMargin: 10
@@ -99,6 +101,7 @@ Rectangle {
                     radius: height / 2
                     color: "gray"
                 }
+
                 background: Rectangle {
                     y: (slider.height - height) / 2
                     height: parent.height * 0.3
@@ -112,7 +115,6 @@ Rectangle {
                         radius: height / 2
                     }
                 }
-
             }
         }
 

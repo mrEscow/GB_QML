@@ -27,12 +27,13 @@ Rectangle {
         anchors.margins: parent.height * 0.03
         anchors.leftMargin: parent.width * 0.1
         anchors.rightMargin: parent.width * 0.1
-        spacing: parent.height * 0.02
+        spacing: parent.height * 0.04
 
         Rectangle {
             Layout.alignment: Qt.AlignCenter
             Layout.fillWidth: true
-            Layout.fillHeight: true
+            Layout.fillHeight:  true
+            Layout.preferredHeight: 4
             radius: 15
             color: secondBubbleColor
 
@@ -42,49 +43,29 @@ Rectangle {
                 text: "О себе"
                 font.bold: true
                 font.italic: true
-                font.pixelSize: parent.height * 0.3
+                font.pixelSize: parent.height * 0.1
                 color: textColor
             }
-
-            TextField {
+            Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: about.bottom
                 width: parent.width * 0.9
-                height: parent.height * 4 / 10
-                color: bgColor
-                font.bold: true
-                font.pixelSize: parent.height * 0.2
-                background: Rectangle {
-                    color: componentColor
+                height: parent.height * 8 / 10
+                color: componentColor
+
+                TextInput  {
+                    anchors.fill: parent
+                    color: bgColor
+                    font.bold: true
+                    font.pixelSize: parent.height * 0.08
+                    wrapMode:  Text.WordWrap
                 }
             }
         }
 
-        Rectangle {
-            Layout.alignment: Qt.AlignCenter
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            radius: 15
-            color: "transparent"
+        DownButtons {
+            id: buttons
+            Layout.preferredHeight: 1
         }
-
-        Rectangle {
-            Layout.alignment: Qt.AlignCenter
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            radius: 15
-            color: "transparent"
-        }
-
-
-        Rectangle {
-            Layout.alignment: Qt.AlignCenter
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            radius: 15
-            color: "transparent"
-        }
-
-        DownButtons {}
     }
 }

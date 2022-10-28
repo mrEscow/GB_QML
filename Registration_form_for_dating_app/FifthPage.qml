@@ -36,42 +36,156 @@ Rectangle {
             Layout.fillHeight: true
             radius: 15
             color: secondBubbleColor
+            Layout.preferredHeight: 2
 
             Text {
                 id: country
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Возраст партнера " + slider.value
+                text: "Возраст партнера "
                 font.bold: true
                 font.italic: true
-                font.pixelSize: parent.height * 0.3
+                font.pixelSize: parent.height * 0.15
                 color: textColor
             }
 
-            Slider {
-                id: slider
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: country.bottom
-                anchors.topMargin: 10
-                width: parent.width * 0.9
-                height: parent.height * 0.2
-                from: 18
-                to: 120
-                stepSize: 1
-                font.bold: true
-                font.pixelSize: 24
-                background: Rectangle {
-                    color: componentColor
-                }
+                        RowLayout {
+                            id: upLayout
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            anchors.top: country.bottom
+                            anchors.topMargin: 10
+                            width: parent.width * 0.9
+                            height: parent.height * 0.2
 
-            }
+                            Text {
+                                id: upTextL
+                                //Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                Layout.preferredHeight: 1
+                                font: country.font
+                                color: textColor
+                                text: "от "
+                            }
+
+                            Slider {
+                                id: upSlider
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                Layout.preferredHeight: 4
+                                from: 18
+                                to: 120
+                                stepSize: 1
+                                font.bold: true
+                                font.pixelSize: 24
+
+                                handle: Rectangle {
+                                    x: upSlider.visualPosition * (upSlider.width - width)
+                                    y: (upSlider.height - height) / 2
+                                    width: parent.width * 0.08
+                                    height: parent.width * 0.08
+                                    radius: height / 2
+                                    color: "gray"
+                                }
+
+                                background: Rectangle {
+                                    y: (upSlider.height - height) / 2
+                                    height: parent.height * 0.3
+                                    radius: height / 2
+                                    color: componentColor
+
+                                    Rectangle {
+                                        width: upSlider.visualPosition * parent.width
+                                        height: parent.height
+                                        color: Qt.darker(componentColor)
+                                        radius: height / 2
+                                    }
+                                }
+                            }
+
+
+                            Text {
+                                id: upTextR
+                                Layout.fillHeight: true
+                                Layout.preferredHeight: 1
+                                font: country.font
+                                color: textColor
+                                text:  upSlider.value
+                            }
+                        }
+
+
+                        RowLayout {
+                            id: downLayout
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            anchors.top: upLayout.bottom
+                            anchors.topMargin: 10
+                            width: parent.width * 0.9
+                            height: parent.height * 0.2
+
+                            Text {
+                                id: downTextL
+                                Layout.fillHeight: true
+                                Layout.preferredHeight: 1
+                                font: country.font
+                                color: textColor
+                                text: "до "
+                            }
+
+                            Slider {
+                                id: downSlider
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                Layout.preferredHeight: 5
+                                from: 18
+                                to: 120
+                                value: 120
+                                stepSize: 1
+                                font.bold: true
+                                font.pixelSize: 24
+
+                                handle: Rectangle {
+                                    x: downSlider.visualPosition * (downSlider.width - width)
+                                    y: (downSlider.height - height) / 2
+                                    width: parent.width * 0.08
+                                    height: parent.width * 0.08
+                                    radius: height / 2
+                                    color: "gray"
+                                }
+
+                                background: Rectangle {
+                                    y: (downSlider.height - height) / 2
+                                    height: parent.height * 0.3
+                                    radius: height / 2
+                                    color: componentColor
+
+                                    Rectangle {
+                                        width: downSlider.visualPosition * parent.width
+                                        height: parent.height
+                                        color: Qt.darker(componentColor)
+                                        radius: height / 2
+                                    }
+                                }
+                            }
+
+
+                            Text {
+                                id: downTextR
+                                Layout.fillHeight: true
+                                Layout.preferredHeight: 1
+                                font: country.font
+                                color: textColor
+                                text:  downSlider.value
+                            }
+                        }
         }
 
+        ////////////////////////////////////////////////
         Rectangle {
             Layout.alignment: Qt.AlignCenter
             Layout.fillWidth: true
             Layout.fillHeight: true
             radius: 15
             color: secondBubbleColor
+            Layout.preferredHeight: 1
 
             Text {
                 id: sex
@@ -86,40 +200,80 @@ Rectangle {
             RowLayout {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: sex.bottom
+                anchors.topMargin: 5
                 width: parent.width * 0.9
                 height: parent.height * 4 / 10
 
                 RadioButton {
-                    Layout.alignment: Qt.AlignCenter
-                    text: "<font color=\"" + Qt.lighter("dark blue") + "\"> M </font>"
+                    id: radioButtonL
+                    Layout.alignment: Qt.AlignRight
+                    Layout.fillHeight: true
+                    implicitHeight:15
+                    Layout.minimumHeight: 15
+                    text: "<font color=\"" + Qt.lighter("dark blue") + "\"> M</font>"
                     font.bold: true
-                    font.pixelSize: 24
+                    font.pixelSize: parent.height * 0.7
                     background: Rectangle {
                         color: secondBubbleColor
                     }
+                    indicator: Rectangle {
+                        height: parent.height * 0.9
+                        width: height
+                        x: radioButtonL.leftPadding
+                        y: parent.height / 2 - height / 2
+                        radius: width / 2
+                        color: componentColor
+                        border.color: radioButtonL.down ? "gray" : "gray"
 
+                        Rectangle {
+                            width: parent.width * 0.9
+                            height: parent.height * 0.9
+                            x: parent.width / 2 - width / 2
+                            y: parent.height / 2 - height / 2
+                            radius: width / 2
+                            color: radioButtonL.down ? "gray" : "gray"
+                            visible: radioButtonL.checked
+                        }
+                    }
 
                 }
 
                 RadioButton {
-                    Layout.alignment: Qt.AlignCenter
-                    text: "<font color=\"" + Qt.lighter("red") + "\"> Ж </font>"
+                    id: radioButtonR
+                    Layout.alignment: Qt.AlignLeft
+                    implicitHeight:15
+                    Layout.minimumHeight: 15
+                    Layout.fillHeight: true
+                    text: "<font color=\"" + Qt.lighter("red") + "\"> Ж</font>"
                     font.bold: true
-                    font.pixelSize: 24
+                    font.pixelSize: parent.height * 0.7
                     background: Rectangle {
                         color: secondBubbleColor
+                    }
+                    indicator: Rectangle {
+                        height: parent.height * 0.9
+                        width: height
+                        x: radioButtonR.leftPadding
+                        y: parent.height / 2 - height / 2
+                        radius: width / 2
+                        color: componentColor
+                        border.color: radioButtonR.down ? "gray" : "gray"
+
+                        Rectangle {
+                            width: parent.width * 0.9
+                            height: parent.height * 0.9
+                            x: parent.width / 2 - width / 2
+                            y: parent.height / 2 - height / 2
+                            radius: width / 2
+                            color: radioButtonR.down ? "gray" : "gray"
+                            visible: radioButtonR.checked
+                        }
                     }
                 }
             }
         }
 
-        Rectangle {
-            Layout.alignment: Qt.AlignCenter
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            radius: 15
-            color: "transparent"
-        }
+
 
         Rectangle {
             Layout.alignment: Qt.AlignCenter
@@ -127,8 +281,12 @@ Rectangle {
             Layout.fillHeight: true
             radius: 15
             color: "transparent"
+            Layout.preferredHeight: 1
         }
 
-        DownButtons {}
+        DownButtons {
+            Layout.preferredHeight: 1
+        }
     }
+
 }

@@ -28,8 +28,8 @@ Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
                     font.bold: true
-                    font.pixelSize: parent.height / 5
-                    color: buttonTextColor
+                    font.pixelSize: parent.height / 4
+                    color: Qt.darker(buttonTextColor)
                     text: leftButtonName + "   "
                 }
                 MouseArea {
@@ -47,8 +47,8 @@ Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
                     font.bold: true
-                    font.pixelSize: parent.height / 5
-                    color: buttonTextColor
+                    font.pixelSize: parent.height / 4
+                    color: Qt.darker(buttonTextColor)
                     text: "   " + rightButtonName
                 }
                 MouseArea {

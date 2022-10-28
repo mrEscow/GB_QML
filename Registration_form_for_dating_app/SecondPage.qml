@@ -42,21 +42,41 @@ Rectangle {
             Text {
                 id: country
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Ваша Сстрана"
+                text: "Ваша страна"
                 font.bold: true
                 font.italic: true
                 font.pixelSize: parent.height * 0.3
                 color: textColor
             }
 
-            TextField {
+            ComboBox {
+                id: comboBox
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: country.bottom
-                width: parent.width * 0.9
+                width: parent.width * 0.8
                 height: parent.height * 4 / 10
-                color: bgColor
+                model:["Russia","Сербия","Belarus","Иран","Куба" ]
+                delegate: ItemDelegate {
+                    width: comboBox.width
+                    contentItem: Rectangle {
+                        anchors.fill: parent
+                        color: componentColor
+                        Text {
+                            text: modelData
+                            color: Qt.darker(buttonTextColor)
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            font.pixelSize: parent.height * 0.4
+                            font.bold: true
+
+                        }
+                    }
+                    highlighted: comboBox.highlightedIndex === index
+                }
+
                 font.bold: true
-                font.pixelSize: 24
+                font.pixelSize: parent.height * 0.2
+
                 background: Rectangle {
                     color: componentColor
                 }
@@ -83,11 +103,13 @@ Rectangle {
             TextField {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: city.bottom
-                width: parent.width * 0.9
+                width: parent.width * 0.8
                 height: parent.height * 4 / 10
                 color: bgColor
                 font.bold: true
-                font.pixelSize: 24
+                font.pixelSize: parent.height * 0.2
+                horizontalAlignment : Text.AlignHCenter
+                verticalAlignment : Text.AlignVCenter
                 background: Rectangle {
                     color: componentColor
                 }
