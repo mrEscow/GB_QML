@@ -4,13 +4,11 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
 Rectangle {
-    id: secondPage
-
+    id: endPage
     property string leftButtonName: "left"
     property string rightButtonName: "right"
     signal leftButtonClicked()
     signal rightButtonClicked()
-
 
     anchors.fill: parent
     anchors.margins: 64
@@ -24,19 +22,18 @@ Rectangle {
         anchors.rightMargin: 30
         spacing: 2
 
-
+        // Email
         Rectangle {
             Layout.alignment: Qt.AlignCenter
             Layout.fillHeight: true
-
             width: bubbleWidth
             radius: 15
             color: secondBubbleColor
 
             Text {
-                id: country
+                id: email
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Ваша Сстрана"
+                text: "Ваша почта"
                 font.bold: true
                 font.italic: true
                 font.pixelSize: parent.height * 0.3
@@ -45,7 +42,7 @@ Rectangle {
 
             TextField {
                 anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: country.bottom
+                anchors.top: email.bottom
                 width: parent.width * 0.9
                 height: parent.height * 4 / 10
                 color: bgColor
@@ -57,7 +54,7 @@ Rectangle {
             }
         }
 
-
+        // Пароль
         Rectangle {
             Layout.alignment: Qt.AlignCenter
             Layout.fillHeight: true
@@ -66,17 +63,18 @@ Rectangle {
             color: secondBubbleColor
 
             Text {
-                id: toun
+                id: password
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Ваш город"
+                text: "Пароль"
                 font.bold: true
                 font.italic: true
                 font.pixelSize: parent.height * 0.3
                 color: textColor
             }
+
             TextField {
                 anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: toun.bottom
+                anchors.top: password.bottom
                 width: parent.width * 0.9
                 height: parent.height * 4 / 10
                 color: bgColor
@@ -88,19 +86,42 @@ Rectangle {
             }
         }
 
-
+        // Пароль2
         Rectangle {
             Layout.alignment: Qt.AlignCenter
             Layout.fillHeight: true
             width: bubbleWidth
             radius: 15
-            color: "transparent"
-        }
+            color: secondBubbleColor
 
+            Text {
+                id: password2
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "Пароль повторно"
+                font.bold: true
+                font.italic: true
+                font.pixelSize: parent.height * 0.3
+                color: textColor
+            }
+
+            TextField {
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: password2.bottom
+                width: parent.width * 0.9
+                height: parent.height * 4 / 10
+                color: bgColor
+                font.bold: true
+                font.pixelSize: 24
+                background: Rectangle {
+                    color: componentColor
+                }
+            }
+        }
 
         Rectangle {
             Layout.alignment: Qt.AlignCenter
             Layout.fillHeight: true
+
             width: bubbleWidth
             radius: 15
             color: "transparent"
@@ -135,7 +156,7 @@ Rectangle {
                             font.bold: true
                             font.pixelSize: parent.height / 3
                             color: buttonTextColor
-                            text: leftButtonName + "  "
+                            text: leftButtonName + "   "
                         }
                         MouseArea {
                             anchors.fill: parent
@@ -154,7 +175,7 @@ Rectangle {
                             font.bold: true
                             font.pixelSize: parent.height / 3
                             color: buttonTextColor
-                            text: "  " + rightButtonName
+                            text: "   " + rightButtonName
                         }
                         MouseArea {
                             anchors.fill: parent
@@ -176,9 +197,7 @@ Rectangle {
                         text: "< >"
                     }
                 }
-
             }
         }
-
     }
 }

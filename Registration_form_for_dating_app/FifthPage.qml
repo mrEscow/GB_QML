@@ -4,13 +4,11 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
 Rectangle {
-    id: secondPage
-
+    id: fifthPage
     property string leftButtonName: "left"
     property string rightButtonName: "right"
     signal leftButtonClicked()
     signal rightButtonClicked()
-
 
     anchors.fill: parent
     anchors.margins: 64
@@ -27,6 +25,7 @@ Rectangle {
 
         Rectangle {
             Layout.alignment: Qt.AlignCenter
+
             Layout.fillHeight: true
 
             width: bubbleWidth
@@ -36,27 +35,31 @@ Rectangle {
             Text {
                 id: country
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Ваша Сстрана"
+                text: "Возраст партнера " + slider.value
                 font.bold: true
                 font.italic: true
                 font.pixelSize: parent.height * 0.3
                 color: textColor
             }
 
-            TextField {
+            Slider {
+                id: slider
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: country.bottom
+                anchors.topMargin: 10
                 width: parent.width * 0.9
-                height: parent.height * 4 / 10
-                color: bgColor
+                height: parent.height * 0.2
+                from: 18
+                to: 120
+                stepSize: 1
                 font.bold: true
                 font.pixelSize: 24
                 background: Rectangle {
                     color: componentColor
                 }
+
             }
         }
-
 
         Rectangle {
             Layout.alignment: Qt.AlignCenter
@@ -66,29 +69,45 @@ Rectangle {
             color: secondBubbleColor
 
             Text {
-                id: toun
+                id: sex
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Ваш город"
+                text: "Пол партнера"
                 font.bold: true
                 font.italic: true
                 font.pixelSize: parent.height * 0.3
                 color: textColor
             }
-            TextField {
+
+            RowLayout {
                 anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: toun.bottom
+                anchors.top: sex.bottom
                 width: parent.width * 0.9
                 height: parent.height * 4 / 10
-                color: bgColor
-                font.bold: true
-                font.pixelSize: 24
-                background: Rectangle {
-                    color: componentColor
+
+                RadioButton {
+                    Layout.alignment: Qt.AlignCenter
+                    text: "<font color=\"" + Qt.lighter("dark blue") + "\"> M </font>"
+                    font.bold: true
+                    font.pixelSize: 24
+                    background: Rectangle {
+                        color: secondBubbleColor
+                    }
+
+
+                }
+
+                RadioButton {
+                    Layout.alignment: Qt.AlignCenter
+                    text: "<font color=\"" + Qt.lighter("red") + "\"> Ж </font>"
+                    font.bold: true
+                    font.pixelSize: 24
+                    background: Rectangle {
+                        color: secondBubbleColor
+                    }
                 }
             }
         }
 
-
         Rectangle {
             Layout.alignment: Qt.AlignCenter
             Layout.fillHeight: true
@@ -97,14 +116,12 @@ Rectangle {
             color: "transparent"
         }
 
-
         Rectangle {
             Layout.alignment: Qt.AlignCenter
             Layout.fillHeight: true
             width: bubbleWidth
             radius: 15
             color: "transparent"
-
         }
 
         // Кнопки
@@ -135,7 +152,7 @@ Rectangle {
                             font.bold: true
                             font.pixelSize: parent.height / 3
                             color: buttonTextColor
-                            text: leftButtonName + "  "
+                            text: leftButtonName + "   "
                         }
                         MouseArea {
                             anchors.fill: parent
@@ -154,7 +171,7 @@ Rectangle {
                             font.bold: true
                             font.pixelSize: parent.height / 3
                             color: buttonTextColor
-                            text: "  " + rightButtonName
+                            text: "   " + rightButtonName
                         }
                         MouseArea {
                             anchors.fill: parent
@@ -176,9 +193,7 @@ Rectangle {
                         text: "< >"
                     }
                 }
-
             }
         }
-
     }
 }

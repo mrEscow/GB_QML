@@ -4,13 +4,11 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
 Rectangle {
-    id: secondPage
-
+    id: fourthPage
     property string leftButtonName: "left"
     property string rightButtonName: "right"
     signal leftButtonClicked()
     signal rightButtonClicked()
-
 
     anchors.fill: parent
     anchors.margins: 64
@@ -24,7 +22,7 @@ Rectangle {
         anchors.rightMargin: 30
         spacing: 2
 
-
+        // Name
         Rectangle {
             Layout.alignment: Qt.AlignCenter
             Layout.fillHeight: true
@@ -34,9 +32,9 @@ Rectangle {
             color: secondBubbleColor
 
             Text {
-                id: country
+                id: name
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Ваша Сстрана"
+                text: "О себе"
                 font.bold: true
                 font.italic: true
                 font.pixelSize: parent.height * 0.3
@@ -45,7 +43,7 @@ Rectangle {
 
             TextField {
                 anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: country.bottom
+                anchors.top: name.bottom
                 width: parent.width * 0.9
                 height: parent.height * 4 / 10
                 color: bgColor
@@ -57,37 +55,13 @@ Rectangle {
             }
         }
 
-
         Rectangle {
             Layout.alignment: Qt.AlignCenter
             Layout.fillHeight: true
             width: bubbleWidth
             radius: 15
-            color: secondBubbleColor
-
-            Text {
-                id: toun
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: "Ваш город"
-                font.bold: true
-                font.italic: true
-                font.pixelSize: parent.height * 0.3
-                color: textColor
-            }
-            TextField {
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: toun.bottom
-                width: parent.width * 0.9
-                height: parent.height * 4 / 10
-                color: bgColor
-                font.bold: true
-                font.pixelSize: 24
-                background: Rectangle {
-                    color: componentColor
-                }
-            }
+            color: "transparent"
         }
-
 
         Rectangle {
             Layout.alignment: Qt.AlignCenter
@@ -104,7 +78,6 @@ Rectangle {
             width: bubbleWidth
             radius: 15
             color: "transparent"
-
         }
 
         // Кнопки
@@ -135,7 +108,7 @@ Rectangle {
                             font.bold: true
                             font.pixelSize: parent.height / 3
                             color: buttonTextColor
-                            text: leftButtonName + "  "
+                            text: leftButtonName + "   "
                         }
                         MouseArea {
                             anchors.fill: parent
@@ -154,7 +127,7 @@ Rectangle {
                             font.bold: true
                             font.pixelSize: parent.height / 3
                             color: buttonTextColor
-                            text: "  " + rightButtonName
+                            text: "   " + rightButtonName
                         }
                         MouseArea {
                             anchors.fill: parent
@@ -176,9 +149,7 @@ Rectangle {
                         text: "< >"
                     }
                 }
-
             }
         }
-
     }
 }

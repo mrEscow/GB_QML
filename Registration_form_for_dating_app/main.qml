@@ -5,7 +5,7 @@ import QtQuick.Controls 2.15
 
 Window {
     width: 640
-    minimumWidth: 450
+    //minimumWidth: 450
     height: 480
     visible: true
     title: qsTr("Registration form")
@@ -25,11 +25,13 @@ Window {
         color: bgColor
 
         Text {
+            id: label
+            anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             text: "Регистрация"
             font.bold: true
             font.italic: true
-            font.pixelSize: 48
+            font.pixelSize: parent.width * 0.06
             color: textColor
         }
 
@@ -41,12 +43,12 @@ Window {
 
         FirstPage {
             id: firstPage
+
             leftButtonName: "Выход   "
             rightButtonName: " Продолжить"
             onLeftButtonClicked: {
                 close();
             }
-
             onRightButtonClicked: {
                 stackView.push(secondPage)
             }
@@ -54,17 +56,68 @@ Window {
 
         SecondPage {
             id: secondPage
+            visible: false
             leftButtonName: "Вернуться   "
             rightButtonName: " Продолжить"
             onLeftButtonClicked: {
                 stackView.pop()
             }
-
             onRightButtonClicked: {
-                //stackView.push(secondPage)
+                stackView.push(thirdPage)
             }
         }
 
+        ThirdPage {
+            id: thirdPage
+            visible: false
+            leftButtonName: "Вернуться   "
+            rightButtonName: " Продолжить"
+            onLeftButtonClicked: {
+                stackView.pop()
+            }
+            onRightButtonClicked: {
+                stackView.push(fourthPage)
+            }
+        }
+
+        FourthPage {
+            id: fourthPage
+            visible: false
+            leftButtonName: "Вернуться   "
+            rightButtonName: " Продолжить"
+            onLeftButtonClicked: {
+                stackView.pop()
+            }
+            onRightButtonClicked: {
+                stackView.push(fifthPage)
+            }
+        }
+
+        FifthPage {
+            id: fifthPage
+            visible: false
+            leftButtonName: "Вернуться   "
+            rightButtonName: " Продолжить"
+            onLeftButtonClicked: {
+                stackView.pop()
+            }
+            onRightButtonClicked: {
+                stackView.push(endPage)
+            }
+        }
+
+        EndPage {
+            id: endPage
+            visible: false
+            leftButtonName: "Вернуться   "
+            rightButtonName: " Продолжить"
+            onLeftButtonClicked: {
+                stackView.pop()
+            }
+            onRightButtonClicked: {
+                //stackView.push(threedPage)
+            }
+        }
 
 
     }

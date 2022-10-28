@@ -3,5 +3,9 @@
         <file>main.qml</file>
         <file>FirstPage.qml</file>
         <file>SecondPage.qml</file>
+        <file>ThirdPage.qml</file>
+        <file>EndPage.qml</file>
+        <file>FourthPage.qml</file>
+        <file>FifthPage.qml</file>
     </qresource>
 </RCC>
