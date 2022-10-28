@@ -67,7 +67,7 @@ Rectangle {
             color: secondBubbleColor
 
             Text {
-                id: country
+                id: age
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "Ваш возраст " + slider.value
                 font.bold: true
@@ -80,7 +80,7 @@ Rectangle {
                 id: slider
 
                 anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: country.bottom
+                anchors.top: age.bottom
                 anchors.topMargin: 10
                 width: parent.width * 0.9
                 height: parent.height * 0.3
@@ -211,7 +211,6 @@ Rectangle {
             Layout.alignment: Qt.AlignCenter
             Layout.fillWidth: true
             Layout.fillHeight: true
-            //width: bubbleWidth
             radius: 15
             color: "transparent"
         }
@@ -277,6 +276,9 @@ Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     height: bottonsAria.height
                     color: secondBubbleColor
+                    MouseArea {
+                        anchors.fill: parent
+                    }
                 }
             }
         }
