@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
 Rectangle {
+    property alias failGenderAnim: failGenderAnim
     property string preferredGander: {
         if(radioButtonL.checked) return "M"
         else if(radioButtonR.checked) return "Ж"
@@ -292,6 +293,33 @@ Rectangle {
 
         DownButtons {
             Layout.preferredHeight: 1
+        }
+
+        SequentialAnimation {
+        id: failGenderAnim
+            PropertyAnimation {
+
+                targets: [gender,radioButtonR.indicator, radioButtonL.indicator]
+                property: "color"
+                to: "dark red"
+                duration: 0
+            }
+            ParallelAnimation {
+                PropertyAnimation {
+
+                    targets: [radioButtonR.indicator,radioButtonL.indicator]
+                    property: "color"
+                    to: componentColor
+                    duration: 400
+                }
+                PropertyAnimation {
+
+                    targets: [gender]
+                    property: "color"
+                    to: textColor
+                    duration: 400
+                }
+            }
         }
     }
 

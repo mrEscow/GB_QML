@@ -4,6 +4,9 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
 Rectangle {
+    property alias failNameAnim: failNameAnim
+    property alias failGenderAnim: failGenderAnim
+
     property alias userName: userName.text
     property alias userAge: slider.value
     property string userGender: {
@@ -13,8 +16,10 @@ Rectangle {
     }
     property string leftButtonName: "left"
     property string rightButtonName: "right"
+
     signal leftButtonClicked()
     signal rightButtonClicked()
+
 
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.verticalCenter: parent.verticalCenter
@@ -67,6 +72,7 @@ Rectangle {
                 background: Rectangle {
                     color: componentColor
                 }
+                maximumLength: 20
             }
         }
 
@@ -197,6 +203,7 @@ Rectangle {
                         color: secondBubbleColor
                     }
                     indicator: Rectangle {
+                        //id:
                         height: parent.height * 0.9
                         width: height
                         x: radioButtonR.leftPadding
@@ -227,6 +234,52 @@ Rectangle {
             color: "transparent"
         }
 
+
         DownButtons {}
+
+        SequentialAnimation {
+        id: failNameAnim
+            PropertyAnimation {
+
+                targets: [name]
+                property: "color"
+                to: "dark red"
+                duration: 0
+            }
+            PropertyAnimation {
+
+                targets: [name]
+                property: "color"
+                to: textColor
+                duration: 400
+            }
+        }
+
+        SequentialAnimation {
+        id: failGenderAnim
+            PropertyAnimation {
+
+                targets: [gender,radioButtonR.indicator, radioButtonL.indicator]
+                property: "color"
+                to: "dark red"
+                duration: 0
+            }
+            ParallelAnimation {
+                PropertyAnimation {
+
+                    targets: [radioButtonR.indicator,radioButtonL.indicator]
+                    property: "color"
+                    to: componentColor
+                    duration: 400
+                }
+                PropertyAnimation {
+
+                    targets: [gender]
+                    property: "color"
+                    to: textColor
+                    duration: 400
+                }
+            }
+        }
     }
 }

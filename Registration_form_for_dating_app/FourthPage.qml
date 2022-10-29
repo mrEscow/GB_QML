@@ -61,6 +61,7 @@ Rectangle {
                     font.bold: true
                     font.pixelSize: parent.height * 0.08
                     wrapMode:  Text.WordWrap
+                    maximumLength: 150
                 }
             }
         }

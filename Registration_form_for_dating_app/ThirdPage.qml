@@ -112,6 +112,7 @@ Rectangle {
                 background: Rectangle {
                     color: componentColor
                 }
+                maximumLength: 20
             }
         }
 

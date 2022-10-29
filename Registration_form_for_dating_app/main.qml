@@ -97,6 +97,7 @@ Window {
         Text {
             id: label
             anchors.top: parent.top
+            anchors.topMargin: 9
             anchors.horizontalCenter: parent.horizontalCenter
             text: "Регистрация"
             font.bold: true
@@ -114,12 +115,31 @@ Window {
         FirstPage {
             id: firstPage
             visible: false
+
             leftButtonName: "Выход   "
             rightButtonName: " Продолжить"
+
             onLeftButtonClicked: {
                 close();
             }
             onRightButtonClicked: {
+
+                if( userName === "" && userGender === "М/Ж" ){
+                    failNameAnim.start()
+                    failGenderAnim.start()
+                    return;
+                }
+
+                if(userName === ""){
+                    failNameAnim.start()
+                    return
+                }
+
+                if(userGender === "М/Ж"){
+                    failGenderAnim.start()
+                    return;
+                }
+
                 _userName = userName;
                 _userAge = userAge
                 _userGender = userGender
@@ -196,6 +216,11 @@ Window {
                 stackView.pop()
             }
             onRightButtonClicked: {
+                if(preferredGander === "М/Ж"){
+                    failGenderAnim.start()
+                    return;
+                }
+
                 _preferredGander = preferredGander;
                 _preferredMinAge = preferredMinAge
                 _preferredManAge = preferredManAge
@@ -217,6 +242,18 @@ Window {
                 stackView.pop()
             }
             onRightButtonClicked: {
+
+                if(email.search(/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/) !== 0){
+                    failEmailAnim.start();
+                    return;
+                }
+
+                if(password.length < 8 || password !== password2){
+                    failPasswordsAnim.start();
+                    return;
+                }
+
+
                 _email = email
                 _password = password
 
@@ -226,6 +263,7 @@ Window {
                 var newUser = createUser()
                 printUser(newUser);
                 clenDate()
+
 
                 stackView.pop(null)
             }

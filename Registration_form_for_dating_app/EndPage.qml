@@ -4,8 +4,12 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 
 Rectangle {
+    property alias failEmailAnim: failEmailAnim
+    property alias failPasswordsAnim: failPasswordsAnim
+
     property alias email: textEmail.text
     property alias password: textPassportOne.text
+    property alias password2: textPassportTwo.text
 
     property string leftButtonName: "left"
     property string rightButtonName: "right"
@@ -63,6 +67,22 @@ Rectangle {
                 background: Rectangle {
                     color: componentColor
                 }
+                validator: RegExpValidator {
+                    regExp:/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/
+                }
+                onTextChanged: {
+                    if(textEmail.text.search(/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/) !== 0)
+                        color = "dark red"
+                    else
+                        color = bgColor
+                    //else
+                        //color
+
+                    //console.log()
+
+                }
+
+                maximumLength: 20
             }
         }
 
@@ -97,6 +117,8 @@ Rectangle {
                 background: Rectangle {
                     color: componentColor
                 }
+                maximumLength: 25
+                echoMode: TextInput.Password
             }
         }
 
@@ -132,6 +154,8 @@ Rectangle {
                 background: Rectangle {
                     color: componentColor
                 }
+                maximumLength: 25
+                echoMode: TextInput.Password
             }
         }
 
@@ -145,5 +169,41 @@ Rectangle {
         }
 
         DownButtons {}
+
+        SequentialAnimation {
+        id: failEmailAnim
+            PropertyAnimation {
+
+                targets: [email]
+                property: "color"
+                to: "dark red"
+                duration: 0
+            }
+            PropertyAnimation {
+
+                targets: [email]
+                property: "color"
+                to: textColor
+                duration: 400
+            }
+        }
+
+        SequentialAnimation {
+        id: failPasswordsAnim
+            PropertyAnimation {
+
+                targets: [password, password2]
+                property: "color"
+                to: "dark red"
+                duration: 0
+            }
+            PropertyAnimation {
+
+                targets: [password, password2]
+                property: "color"
+                to: textColor
+                duration: 400
+            }
+        }
     }
 }

@@ -19,11 +19,23 @@ Rectangle {
 
         Row {
             anchors.fill: parent
+
             Rectangle {
                 width: bottonsAria.width / 2
                 height: bottonsAria.height
                 radius: bottonsAria.radius
                 color: buttonsColor
+
+                Button {
+                    anchors.fill: parent
+                    background: Rectangle {
+                        anchors.fill: parent
+                        color: parent.pressed ? Qt.darker(buttonsColor) :parent.hovered ? Qt.lighter(buttonsColor) : buttonsColor
+                        radius: bottonsAria.radius
+                    }
+                    onClicked: leftButtonClicked()
+                }
+
                 Text {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
@@ -32,10 +44,8 @@ Rectangle {
                     color: Qt.darker(buttonTextColor)
                     text: leftButtonName + "   "
                 }
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: leftButtonClicked()
-                }
+
+
             }
 
             Rectangle {
@@ -43,6 +53,17 @@ Rectangle {
                 height: bottonsAria.height
                 radius: bottonsAria.radius
                 color: buttonsColor
+
+                Button {
+                    anchors.fill: parent
+                    background: Rectangle {
+                        anchors.fill: parent
+                        color: parent.pressed ? Qt.darker(buttonsColor) :parent.hovered ? Qt.lighter(buttonsColor) : buttonsColor
+                        radius: bottonsAria.radius
+                    }
+                    onClicked: rightButtonClicked()
+                }
+
                 Text {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
@@ -51,17 +72,16 @@ Rectangle {
                     color: Qt.darker(buttonTextColor)
                     text: "   " + rightButtonName
                 }
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: rightButtonClicked()
-                }
             }
         }
+
         Rectangle {
             width: parent.width * 0.1
             anchors.horizontalCenter: parent.horizontalCenter
-            height: bottonsAria.height
+            anchors.verticalCenter: parent.verticalCenter
+            height: bottonsAria.height * 1.5
             color: secondBubbleColor
+
             MouseArea {
                 anchors.fill: parent
             }
