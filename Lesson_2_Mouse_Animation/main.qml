@@ -8,6 +8,7 @@ Window {
     title: qsTr("Mouse and Animation")
 
     Rectangle {
+        id: rectangle
         width: 300
         height: width
         anchors.centerIn: parent
@@ -15,15 +16,27 @@ Window {
 
         MouseArea {
             anchors.fill: parent
+            acceptedButtons: Qt.LeftButton | Qt.RightButton
 
             onDoubleClicked: {
-                parent.radius = parent.radius === 0 ? parent.height / 2 : 0;
+                if (mouse.button === Qt.LeftButton)
+                    parent.radius = parent.radius === 0 ? parent.height / 2 : 0;
             }
 
             onClicked: {
-                parent.color = Qt.rgba(Math.random(),Math.random(),Math.random(),1);
+                if (mouse.button === Qt.RightButton)
+                    rotationAnimation.start();
+                else if (mouse.button === Qt.LeftButton)
+                    parent.color = Qt.rgba(Math.random(),Math.random(),Math.random(),1);
             }
+        }
 
+        RotationAnimation on rotation{
+            id: rotationAnimation
+            from:0
+            to: 360
+            duration: 1000;
+            running: false
         }
     }
 }
