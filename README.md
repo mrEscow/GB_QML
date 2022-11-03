@@ -13,7 +13,7 @@
 #
 [Lesson_3 States_Transitions_Animation](https://github.com/mrEscow/GB_QML/tree/Lesson_3_States_Transitions_Animation)
 #
-[]()
+[Lesson 3 Models_and_Views](https://github.com/mrEscow/GB_QML/tree/Lesson_3_Models_and_Views)
 #
 []()
 
