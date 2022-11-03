@@ -11,7 +11,7 @@
 #
 [Lesson_2 Mouse_and_Animation](https://github.com/mrEscow/GB_QML/tree/Lesson_2_Mouse_and_Animation)
 #
-[Lesson_3 States_TransitionsAnimation](https://github.com/mrEscow/GB_QML/tree/Lesson_3_States_Transitions_Animation)
+[Lesson_3 States_Transitions_Animation](https://github.com/mrEscow/GB_QML/tree/Lesson_3_States_Transitions_Animation)
 #
 []()
 #
