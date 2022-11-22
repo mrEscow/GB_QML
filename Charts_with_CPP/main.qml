@@ -11,6 +11,10 @@ Window {
     visible: true
     title: qsTr("Charts with C++")
 
+    Metrixs {
+        id: matrixs
+    }
+
     Item {
         anchors.fill: parent
         property int chart: Metrixs.PieChart
@@ -53,26 +57,29 @@ Window {
                     legend.alignment: Qt.AlignBottom
                     antialiasing: true
 
-                    PieSeries {
-                        id: pieSeries
-                        PieSlice { label: "Volkswagen"; value: 13.5 }
-                        PieSlice { label: "Toyota"; value: 10.9 }
-                        PieSlice { label: "Ford"; value: 8.6 }
-                        PieSlice { label: "Skoda"; value: 8.2 }
-                        PieSlice { label: "Volvo"; value: 6.8 }
-                    } // Доли графика будут рассчитаны автоматически
+                    LineSeries {
+                        id: lineSeries
+                        name: "LineSeries"
+                    }
                 }
             }
         }
 
         Component.onCompleted: {
-            pieSeries.append("Others", 52.0);
-            pieSeries.find("Volkswagen").exploded = true;
 
-            //print(othersSlice);
+            matrixs.y_sinX();
+
+            var x = matrixs.getXs()
+            var y = matrixs.getYs()
+
+            var l = matrixs.length
+
+            print("SIZE ", l)
+
+            for(var i = 0; i < matrixs.length; i++){
+                lineSeries.append(x[i],y[i]);
+            }
+
         }
-
-
     }
-
 }

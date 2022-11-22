@@ -14,6 +14,11 @@ class Metrixs : public QObject
     AUTO_PROPERTY(QColor, color)
     AUTO_PROPERTY(QString, name)
 
+    Q_PROPERTY(QVector<qreal> Xs READ getXs CONSTANT)
+    Q_PROPERTY(QVector<qreal> Ys READ getYs CONSTANT)
+
+    Q_PROPERTY(int length READ length CONSTANT)
+
 public:
     enum Charts {
         BarChart,
@@ -22,6 +27,17 @@ public:
         PolarChart
     };
     Q_ENUM(Charts)
+    void setPriority(Charts chart);
+    Charts chart() const;
+public:
+    Q_INVOKABLE QVector<qreal> getXs(){ return Xs;}
+    Q_INVOKABLE QVector<qreal> getYs(){ return Ys;}
+
+    Q_INVOKABLE int length(){ return m_length;}
+//    Q_INVOKABLE void setLength(int){
+//        length = Xs.length();
+//    }
+
 
 public:
     explicit Metrixs(QObject *parent = nullptr);
@@ -29,13 +45,15 @@ public:
 signals:
 
 public slots:
-    void Y_sinX();
-    void Y_X();
-    void Y_modX();
-    void Y_sqrtX();
-    void Y_log2X();
+    void y_sinX();
+    void y_X();
+    void y_modX();
+    void y_sqrtX();
+    void y_log2X();
 private:
     QVector<qreal> Xs;
     QVector<qreal> Ys;
+
+    int m_length{0};
 };
 

@@ -8,23 +8,25 @@ Metrixs::Metrixs(QObject *parent)
     for (qreal x = 0; x <= 5; x += 0.1f) {
         Xs.push_back(x);
     }
+
+    m_length = Xs.length();
 }
 
-void Metrixs::Y_sinX()
+void Metrixs::y_sinX()
 {
     Ys.clear();
     for(const auto x: Xs)
         Ys.push_back(qSin(x));
 }
 
-void Metrixs::Y_X()
+void Metrixs::y_X()
 {
     Ys.clear();
     for(const auto x: Xs)
         Ys.push_back(x);
 }
 
-void Metrixs::Y_modX()
+void Metrixs::y_modX()
 {
     Ys.clear();
     for(const auto x: Xs){
@@ -35,14 +37,14 @@ void Metrixs::Y_modX()
     }
 }
 
-void Metrixs::Y_sqrtX()
+void Metrixs::y_sqrtX()
 {
     Ys.clear();
     for(const auto x: Xs)
         Ys.push_back(qSqrt(x));
 }
 
-void Metrixs::Y_log2X()
+void Metrixs::y_log2X()
 {
     //  logx (y) = ln (y) / ln (x),
     Ys.clear();
