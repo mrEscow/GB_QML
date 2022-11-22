@@ -11,7 +11,7 @@ Window {
 
     Item {
         anchors.fill: parent
-        //property variant othersSlice: 0
+        property variant othersSlice: 0
 
         ChartView {
             id: chart
