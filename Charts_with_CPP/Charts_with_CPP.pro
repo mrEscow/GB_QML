@@ -3,6 +3,7 @@ QT += core
 QT += widgets
 QT += charts
 
+CONFIG += c++17
 CONFIG += qmltypes
 QML_IMPORT_NAME = ru.escow.Metrixs
 QML_IMPORT_MAJOR_VERSION = 1

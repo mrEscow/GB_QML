@@ -16,10 +16,10 @@ class Metrixs : public QObject
 
 public:
     enum Charts {
-        BarCharts,
-        PieCharts,
-        CandlestickCharts,
-        PolarCharts
+        BarChart,
+        PieChart,
+        CandlestickChart,
+        PolarChart
     };
     Q_ENUM(Charts)
 
@@ -28,5 +28,14 @@ public:
 
 signals:
 
+public slots:
+    void Y_sinX();
+    void Y_X();
+    void Y_modX();
+    void Y_sqrtX();
+    void Y_log2X();
+private:
+    QVector<qreal> Xs;
+    QVector<qreal> Ys;
 };
 
