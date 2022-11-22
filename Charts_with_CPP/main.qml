@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtCharts 2.15
-
+import ru.escow.Metrixs 1.0
 
 Window {
     width: 640
@@ -32,6 +32,8 @@ Window {
         Component.onCompleted: {
             othersSlice = pieSeries.append("Others", 52.0);
             pieSeries.find("Volkswagen").exploded = true;
+
+            print(Metrixs.PolarCharts);
         }
 
 

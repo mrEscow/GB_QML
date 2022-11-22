@@ -7,7 +7,7 @@
 
 //  К практическому заданию приложите скриншоты графиков.
 
-
+//#include "Metrixs.h"
 
 #include <QApplication>
 #include <QQmlApplicationEngine>
