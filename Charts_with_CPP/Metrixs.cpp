@@ -20,14 +20,14 @@ void Metrixs::Y_sinX()
 void Metrixs::Y_X()
 {
     Ys.clear();
-    for(auto x: Xs)
+    for(const auto x: Xs)
         Ys.push_back(x);
 }
 
 void Metrixs::Y_modX()
 {
     Ys.clear();
-    for(auto x: Xs){
+    for(const auto x: Xs){
         auto t = x - 2.5;
         if(t<0)
             t *= - 1;
@@ -38,7 +38,7 @@ void Metrixs::Y_modX()
 void Metrixs::Y_sqrtX()
 {
     Ys.clear();
-    for(auto x: Xs)
+    for(const auto x: Xs)
         Ys.push_back(qSqrt(x));
 }
 
@@ -46,6 +46,6 @@ void Metrixs::Y_log2X()
 {
     //  logx (y) = ln (y) / ln (x),
     Ys.clear();
-    for(auto x: Xs)
+    for(const auto x: Xs)
         Ys.push_back(qLn(2)/qLn(x));
 }
