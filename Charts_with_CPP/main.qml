@@ -15,11 +15,59 @@ Window {
         id: matrixs
     }
 
+    function resetMatrix(chart){
+
+        lineSeries1.clear();
+        lineSeries2.clear();
+        lineSeries3.clear();
+        lineSeries4.clear();
+        lineSeries5.clear();
+
+        switch(chart){
+        case(0):
+            matrixs.y_sinX();
+            print("matrixs.y_sinX()")
+            break;
+        case(1):
+            matrixs.y_X();
+            print("matrixs.y_X()")
+            break;
+        case(2):
+            matrixs.y_modX();
+            print("matrixs.y_sinX()")
+            break;
+        case(3):
+            matrixs.y_sqrtX();
+            print("matrixs.y_modX()")
+            break;
+        case(4):
+            matrixs.y_log2X();
+            print("matrixs.y_log2X()")
+            break;
+        }
+
+        var x = matrixs.getXs()
+        var y = matrixs.getYs()
+        var l = matrixs.length
+
+        for(var i = 0; i < matrixs.length; i++){
+            lineSeries1.append(x[i],y[i]);
+            lineSeries2.append(x[i],y[i]);
+            lineSeries3.append(x[i],y[i]);
+            lineSeries4.append(x[i],y[i]);
+            lineSeries5.append(x[i],y[i]);
+        }
+
+//        lineSeries1.axisYChanged();
+//        lineSeries2.axisYChanged();
+//        lineSeries3.axisYChanged();
+//        lineSeries4.axisYChanged();
+//        lineSeries5.axisYChanged();
+    }
+
     Item {
         anchors.fill: parent
-        property int chart: Metrixs.PieChart
 
-        //property var othersSlice: 0
 
         ColumnLayout {
             anchors.fill: parent
@@ -29,57 +77,107 @@ Window {
                 //Layout.fillHeight: true
                 Layout.fillWidth: true
 
-                TabButton {
-                    text: "PieChart"
-                }
-                TabButton {
-                    text: "BarChart"
-                }
-                TabButton {
-                    text: "CandlestickChart"
-                }
-                TabButton {
-                    text: "PolarChart"
-                }
+                Repeater {
+                    id: repeater
+                    model: ["Y = Sin(X)", "Y = X", "Y = |X - 2.5|", "Y = X^2", "Y = log2(X)"]
 
+                    TabButton {
+                        text: modelData
+                        onClicked: resetMatrix(bar.currentIndex);
+                    }
+                }
             }
 
             StackLayout {
+                id: stack
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 currentIndex: bar.currentIndex
 
                 ChartView {
-                    id: chart
-                    title: "Top-5 car brand shares in Finland"
+                    title: "Y = Sin(X)"
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     legend.alignment: Qt.AlignBottom
                     antialiasing: true
-
                     LineSeries {
-                        id: lineSeries
-                        name: "LineSeries"
+                        id: lineSeries1
+                        name:  "Y = Sin(X)"
+                        width: 3
+                        color: matrixs.color
+                        axisX: ValueAxis { min: matrixs.Xmin; max: matrixs.Xmax } // Ось OX
+                        axisY: ValueAxis { min: matrixs.Ymin; max: matrixs.Ymax } // Ось OY
                     }
                 }
+
+                ChartView {
+                    title: "Y = X"
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    legend.alignment: Qt.AlignBottom
+                    antialiasing: true
+                    LineSeries {
+                        id: lineSeries2
+                        name: "Y = X"
+                        width: 3
+                        color: matrixs.color
+                        axisX: ValueAxis { min: matrixs.Xmin; max: matrixs.Xmax } // Ось OX
+                        axisY: ValueAxis { min: matrixs.Ymin; max: matrixs.Ymax } // Ось OY
+                    }
+                }
+
+                ChartView {
+                    title: "Y = |X - 2.5|"
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    legend.alignment: Qt.AlignBottom
+                    antialiasing: true
+                    LineSeries {
+                        id: lineSeries3
+                        name: "Y = |X - 2.5|"
+                        width: 3
+                        color: matrixs.color
+                        axisX: ValueAxis { min: matrixs.Xmin; max: matrixs.Xmax } // Ось OX
+                        axisY: ValueAxis { min: matrixs.Ymin; max: matrixs.Ymax } // Ось OY
+                    }
+                }
+
+                ChartView {
+                    title: "Y = X^2"
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    legend.alignment: Qt.AlignBottom
+                    antialiasing: true
+                    LineSeries {
+                        id: lineSeries4
+                        name: "Y = X^2"
+                        width: 3
+                        color: matrixs.color
+                        axisX: ValueAxis { min: matrixs.Xmin; max: matrixs.Xmax } // Ось OX
+                        axisY: ValueAxis { min: matrixs.Ymin; max: matrixs.Ymax } // Ось OY
+                    }
+                }
+
+                ChartView {
+                    title: "Y = log2(X)"
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    legend.alignment: Qt.AlignBottom
+                    antialiasing: true
+                    LineSeries {
+                        id: lineSeries5
+                        name: "Y = log2(X)"
+                        width: 3
+                        color: matrixs.color
+                        axisX: ValueAxis { min: matrixs.Xmin; max: matrixs.Xmax } // Ось OX
+                        axisY: ValueAxis { min: matrixs.Ymin - 5; max: matrixs.Ymax + 50 } // Ось OY
+                    }
+                }
+
+
             }
         }
 
-        Component.onCompleted: {
-
-            matrixs.y_sinX();
-
-            var x = matrixs.getXs()
-            var y = matrixs.getYs()
-
-            var l = matrixs.length
-
-            print("SIZE ", l)
-
-            for(var i = 0; i < matrixs.length; i++){
-                lineSeries.append(x[i],y[i]);
-            }
-
-        }
+        Component.onCompleted: resetMatrix(0)
     }
 }

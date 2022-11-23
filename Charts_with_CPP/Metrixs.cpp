@@ -17,6 +17,7 @@ void Metrixs::y_sinX()
     Ys.clear();
     for(const auto x: Xs)
         Ys.push_back(qSin(x));
+    minmaxY();
 }
 
 void Metrixs::y_X()
@@ -24,6 +25,7 @@ void Metrixs::y_X()
     Ys.clear();
     for(const auto x: Xs)
         Ys.push_back(x);
+    minmaxY();
 }
 
 void Metrixs::y_modX()
@@ -35,6 +37,7 @@ void Metrixs::y_modX()
             t *= - 1;
         Ys.push_back(t);
     }
+    minmaxY();
 }
 
 void Metrixs::y_sqrtX()
@@ -42,6 +45,7 @@ void Metrixs::y_sqrtX()
     Ys.clear();
     for(const auto x: Xs)
         Ys.push_back(qSqrt(x));
+    minmaxY();
 }
 
 void Metrixs::y_log2X()
@@ -50,4 +54,16 @@ void Metrixs::y_log2X()
     Ys.clear();
     for(const auto x: Xs)
         Ys.push_back(qLn(2)/qLn(x));
+    minmaxY();
+}
+
+void Metrixs::minmaxY()
+{
+    auto minmax = std::minmax_element(std::begin(Ys), std::end(Ys));
+    m_Ymin = *(minmax.first);
+    m_Ymax = *(minmax.second);
+
+    qDebug() << "Ymin" << m_Ymin;
+    qDebug() << "Ymax" << m_Ymax;
+
 }
