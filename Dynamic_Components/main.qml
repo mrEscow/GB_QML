@@ -20,9 +20,43 @@ Window {
     title: qsTr("Dynamic_Components")
     color: "light grey"
 
-    property bool isInput: false
+    property bool isInput: false;
 
-    Component.onCompleted: Logic.createSingInForm();
+    Component.onCompleted: Logic.createSingInForm(mainWindow);
 
+    Component {
+        id: comp
+        Rectangle {
+            width: mainWindow.width
+            height: mainWindow.height
+            color: "red"
+            Component.onCompleted: print("loaded red")
+            Component.onDestruction: print("destroyed red")
 
+            MouseArea {
+                anchors.fill: parent
+                onClicked: loader.sourceComponent = comp2
+            }
+
+        }
+    }
+
+    Component {
+        id: comp2
+        Rectangle {
+            width: mainWindow.width
+            height: mainWindow.height
+            color: "green"
+            Component.onCompleted: print("loaded green")
+            Component.onDestruction: print("destroyed green")
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: loader.sourceComponent = comp
+            }
+
+        }
+    }
+
+    Loader { id: loader }
 }

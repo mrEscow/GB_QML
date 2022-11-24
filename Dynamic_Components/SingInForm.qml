@@ -11,6 +11,8 @@ Item {
     property alias login: loginField.text
     property alias password: passwordField.text
 
+
+
     Rectangle {
         width: 300
         height: 300
@@ -50,6 +52,7 @@ Item {
                 onClicked: {
                     if(Logic.checkCreditals(login, password)){
                         print("SING_IN_OK");
+                        Logic.loadApp();
                         root.destroy();
                     }
                     else
@@ -57,5 +60,5 @@ Item {
                 }
             }
         }
-    }
+    }       
 }
