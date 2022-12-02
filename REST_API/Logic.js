@@ -5,13 +5,22 @@ function getData(url) {
     // 1. Создать XMLHttpRequest.
     let xmlhttp = new XMLHttpRequest();
 
+    xmlhttp.setRequestHeader("api-key","test");
 
     xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == XMLHttpRequest.DONE && xmlhttp.status == 200) {
-            print("/////////////////////////////")
-            print(xmlhttp.responseText)
-            print("/////////////////////////////")
-            parseStaff(xmlhttp.responseText);
+        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+            if(xmlhttp.status == 200){
+                print("/////////////////////////////")
+                print(xmlhttp.responseText)
+                print("/////////////////////////////")
+                parseStaff(xmlhttp.responseText);
+            }
+            else {
+                print("NOT_200!")
+                print(xmlhttp.responseText)
+                print("/////////////////////////////")
+            }
+
         }
     }
 
@@ -43,10 +52,10 @@ function getData(url) {
 function parseStaff(response) {
     var jsonObj = JSON.parse(response);
 
-//    var jsonStaff = jsonObj.staff
-//    for(var i = 0; i < jsonStaff.length; i++) {
-//        listview.model.append( {listdata: jsonStaff[i].name +" "+ jsonStaff[i].age + " " + jsonStaff[i].position})
-//    }
+    //    var jsonStaff = jsonObj.staff
+    //    for(var i = 0; i < jsonStaff.length; i++) {
+    //        listview.model.append( {listdata: jsonStaff[i].name +" "+ jsonStaff[i].age + " " + jsonStaff[i].position})
+    //    }
 
     print(jsonObj)
 }

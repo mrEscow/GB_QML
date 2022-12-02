@@ -12,12 +12,14 @@ Window {
 
     property string url: "http://127.0.0.1:5000/staff" // flask
     property string url2: "http://numbersapi.com/1..3,10" // NUMBERS json
+    property string url3: "https://world.openfoodfacts.org/api/v0/product/737628064502.json" //Food
+    property string url4: "https://api.scripture.api.bible/v1/bibles" //BIBLIA
 
     TextField {
         id: urlPath
         width: 2/3 * parent.width
         height: 50
-        text: url2
+        text: url4
     }
 
     Button {
@@ -29,7 +31,7 @@ Window {
         onClicked: {
 
             url = urlPath.text
-            Logic.getData(url2)
+            Logic.getData(url4)
         }
     }
 
