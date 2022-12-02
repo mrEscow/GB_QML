@@ -9,13 +9,15 @@ Window {
     visible: true
     title: qsTr("REST API")
 
-    property string url: "http://127.0.0.1:5000/staff"
+
+    property string url: "http://127.0.0.1:5000/staff" // flask
+    property string url2: "http://numbersapi.com/1..3,10" // NUMBERS json
 
     TextField {
         id: urlPath
         width: 2/3 * parent.width
         height: 50
-        text: url
+        text: url2
     }
 
     Button {
@@ -25,8 +27,9 @@ Window {
         text: "GO"
 
         onClicked: {
+
             url = urlPath.text
-            Logic.getData(url)
+            Logic.getData(url2)
         }
     }
 
