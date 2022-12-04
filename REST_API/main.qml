@@ -2,6 +2,8 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
+import QtGraphicalEffects 1.15
+import QtQuick.Dialogs 1.3 // для MessageDialog
 import "Logic.js" as Logic
 
 Window {
@@ -10,47 +12,48 @@ Window {
     visible: true
     title: qsTr("REST API")
 
+    property int responseStatus
+    property color responseStatusColor: "green"
+    property string nameLabel
 
-    //    property string url: "http://127.0.0.1:5000/staff" // flask
-    //    property string url2: "http://numbersapi.com/1..3,10" // NUMBERS json
-    //    property string url3: "https://world.openfoodfacts.org/api/v0/product/737628064502.json" //Food
-    //    property string url4: "https://api.scripture.api.bible/v1/bibles" //BIBLIA
+    readonly property string defaultImag: "https://flyclipart.com/thumb2/clipart-of-behind-a-dog-collection-272804.png"
+    readonly property string defaultImag2: "https://gas-kvas.com/uploads/posts/2022-06/1655834202_30-gas-kvas-com-p-foto-multyashnoi-sobaki-31.png"
 
-    property int status
-        property string swagger: "https://petstore.swagger.io/v2/"
+    property string swagger: "https://petstore.swagger.io/v2/"
 
     //    // pet
     //    // post
-        property string findByStatus: "pet/findByStatus?status="
-        property string availableStatus: "available"
-        property string pendingStatus: "pending"
-        property string soldStatus: "sold"
-
-    //    TextField {
-    //        id: urlPath
-    //        width: 2/3 * parent.width
-    //        height: 50
-    //        text: swagger
-    //    }
-
-    //    Button {
-    //        width: 1/3 * parent.width
-    //        height: 50
-    //        anchors.left: urlPath.right
-    //        text: "GO"
-
-    //        onClicked: {
-
-    //            const url = swagger + findByStatus + pendingStatus
-    //            Logic.getData(url)
-    //        }
-    //    }
+    property string findByStatus: "pet/findByStatus?"
+    property string availableStatus: "available"
+    property string pendingStatus: "pending"
+    property string soldStatus: "sold"
 
     //Style
     readonly property color bgColor: "#0C7B93"
+    color: "yellow"
 
+    ListModel{
+        id: listModel
+        ListElement {
+            name: "Alice"
+            uid: 123
+            stat: "qwerty"
+            photoUrl: "https://cdn.fishki.net/upload/post/2016/12/02/2153008/chihuahua-na-lugu.jpg"
+        }
+        ListElement {
+            name: "Bob"
+            uid: 1234
+            status: "qwertywer"
+        }
+        ListElement {
+            name: "Cristy"
+            uid: 12345
+            status: "qwertywer"
+        }
+    }
     Page {
         anchors.fill: parent
+        scale: 0.98
         header: Rectangle {
             color: bgColor
             height: 1/5 * parent.height
@@ -71,9 +74,9 @@ Window {
                         border.color: "grey"
                         Label {
                             anchors.centerIn: parent
-                            text: status
+                            text: responseStatus
                             font.pixelSize: 1/2 * parent.height//32
-                            color: "green"
+                            color: responseStatusColor
                             font.bold: true
 
                         }
@@ -110,15 +113,15 @@ Window {
                                     text: "available"
                                     font.bold: true
                                     font.pixelSize: (1/2 * parent.height) + 5
-
                                 }
                             }
 
                             CheckBox {
+                                id: availableCheckBox
                                 width: 1/3 * parent.width
-                                checked: true
+                                //checked: true
                                 scale: 0.8
-
+                                onClicked: Logic.getPets()
                             }
                         }
                         Row{
@@ -137,9 +140,11 @@ Window {
                                 }
                             }
                             CheckBox {
+                                id: pendingCheckBox
                                 width: 1/3* parent.width
                                 checked: true
                                 scale: 0.8
+                                onClicked: Logic.getPets()
                             }
                         }
                         Row{
@@ -158,10 +163,11 @@ Window {
                                 }
                             }
                             CheckBox {
+                                id: soldCheckBox
                                 width: 1/3 * parent.width
-                                checked: true
+                                //checked: true
                                 scale: 0.8
-                                //text: qsTr("First")
+                                onClicked: Logic.getPets()
                             }
                         }
 
@@ -198,14 +204,18 @@ Window {
                                     radius: 15
                                     border.width: 3
                                     border.color: "grey"
-                                    color: parent.pressed ?  Qt.darker("yellow") : parent.hovered? Qt.lighter("yellow") : "yellow"
+                                    color: parent.pressed ?  Qt.darker("green") : parent.hovered? Qt.lighter("green") : "green"
 
                                     Text {
                                         anchors.centerIn: parent
                                         font.pointSize: 16
                                         font.bold: true
-                                        text: "PRESS"
+                                        text: "ЗАКАЗАТЬ"
                                     }
+                                }
+                                onClicked: {
+                                    dialog.open()
+                                    console.log("CLICK:ЗАКАЗАТЬ")
                                 }
                             }
                         }
@@ -221,14 +231,18 @@ Window {
                                     radius: 15
                                     border.width: 3
                                     border.color: "grey"
-                                    color: parent.pressed ?  Qt.darker("yellow") : parent.hovered? Qt.lighter("yellow") : "yellow"
+                                    color: parent.pressed ?  Qt.darker("blue") : parent.hovered? Qt.lighter("blue") : "blue"
 
                                     Text {
                                         anchors.centerIn: parent
                                         font.pointSize: 16
                                         font.bold: true
-                                        text: "PRESS"
+                                        text: "НАЙТИ ПО ID"
                                     }
+                                }
+                                onClicked: {
+                                    dialog2.open()
+                                    console.log("CLICK:НАЙТИ ПО ID")
                                 }
                             }
                         }
@@ -242,8 +256,9 @@ Window {
                     ColumnLayout {
                         anchors.fill: parent
                         Label {
+                            id: labelName
                             Layout.alignment: Qt.AlignCenter
-                            text: "name"
+                            text: listModel.get(swiper.currentIndex).name === undefined ? "error" : listModel.get(swiper.currentIndex).name
                             font.bold: true
                             font.pixelSize: 30
                         }
@@ -267,18 +282,65 @@ Window {
                                         font.bold: true
                                         MouseArea {
                                             anchors.fill: parent
-                                            onClicked: console.log("LEFT")
+                                            onClicked: {
+                                                if(swiper.currentIndex == 0)
+                                                    swiper.currentIndex = listModel.count - 1
+                                                else
+                                                    swiper.currentIndex--
+                                                console.log("LEFT index:", swiper.currentIndex)
+                                            }
                                         }
-
                                     }
-
                                 }
                                 Rectangle {
+                                    id: viewAria
                                     height: parent.height
                                     width: 3/5 * parent.width
                                     color: Qt.lighter(bgColor)
 
-                                }
+                                    ListView {
+                                        id: swiper
+                                        anchors.fill: parent
+                                        model: listModel
+                                        clip: true
+                                        spacing: 20
+                                        snapMode: ListView.SnapOneItem
+                                        orientation: ListView.Horizontal
+                                        delegate: Rectangle{
+                                            width: swiper.width
+                                            height: swiper.height
+                                            radius: height / 2
+                                            scale: 0.8
+                                            color: Qt.lighter(Qt.lighter(bgColor))
+
+                                            Image {
+                                              anchors.fill: parent
+                                              id: petImage
+                                              source: photoUrl === "string" ? defaultImag : photoUrl === "nulla" ? defaultImag2 : photoUrl
+                                              fillMode: Image.PreserveAspectCrop
+                                            }
+
+                                            Label {
+                                                anchors.horizontalCenter: parent.horizontalCenter
+                                                y: parent.height
+                                                text: status
+                                                font.bold: true
+                                                font.pixelSize: 24
+                                                color: "white"
+                                            }
+
+                                        }
+                                        onCurrentIndexChanged: {
+                                            labelName.text = listModel.get(currentIndex).name
+                                            labelId.text = "id:" + listModel.get(currentIndex).id
+
+                                            let photo = listModel.get(currentIndex).photoUrl
+                                            console.log("CurrentIndexChanged:",String(photo))
+                                        }
+
+                                    }
+
+                                } // center center
                                 Rectangle {
                                     radius: 25
                                     height: parent.height
@@ -291,7 +353,14 @@ Window {
                                         font.bold: true
                                         MouseArea {
                                             anchors.fill: parent
-                                            onClicked: console.log("RIGHT")
+                                            onClicked: {
+
+                                                if(swiper.currentIndex == listModel.count - 1)
+                                                    swiper.currentIndex = 0
+                                                else
+                                                    swiper.currentIndex++
+                                                console.log("RIGHT index:", swiper.currentIndex)
+                                            }
                                         }
 
                                     }
@@ -301,10 +370,11 @@ Window {
                         }
 
                         Label {
+                            id: labelId
                             Layout.alignment: Qt.AlignCenter
-                            text: "id"
+                            text: "id:"+listModel.get(swiper.currentIndex).id
                             font.bold: true
-                            font.pixelSize: 30
+                            font.pixelSize: 24
                         }
                     }
                 } // center
@@ -336,8 +406,12 @@ Window {
                                         anchors.centerIn: parent
                                         font.pointSize: 16
                                         font.bold: true
-                                        text: "PRESS"
+                                        text: "+КАРТИНКА"
                                     }
+                                }
+                                onClicked: {
+                                    dialog3.open()
+                                    console.log("CLICK:+КАРТИНКА")
                                 }
                             }
                         }
@@ -353,14 +427,19 @@ Window {
                                     radius: 15
                                     border.width: 3
                                     border.color: "grey"
-                                    color: parent.pressed ?  Qt.darker("yellow") : parent.hovered? Qt.lighter("yellow") : "yellow"
-
+                                    color: parent.pressed ?  Qt.darker("red") : parent.hovered? Qt.lighter("red") : "red"
                                     Text {
                                         anchors.centerIn: parent
                                         font.pointSize: 16
                                         font.bold: true
-                                        text: "PRESS"
+                                        text: "СЪЕСТЬ"
                                     }
+                                }
+                                onClicked: {
+                                    console.log("CLICK:СЪЕСТЬ")
+                                    const id = listModel.get(swiper.currentIndex).id
+                                    print(id)
+                                    Logic.deletePet(id)
                                 }
                             }
                         }
@@ -387,8 +466,118 @@ Window {
     }
 
     Component.onCompleted: {
-        const url = swagger + findByStatus + pendingStatus
-        Logic.getData(url)
+        //const url = swagger + findByStatus + pendingStatus
+        Logic.getPets()
     }
+
+    Dialog {
+        id: dialog
+        title: "Кого изволите поймать?"
+
+        standardButtons: Dialog.Ok | Dialog.Canscel
+        Column {
+            anchors.fill: parent
+            Label {
+                text: "Кличка животного:"
+            }
+
+            TextField {
+                id: dialogName
+
+            }
+            Label {
+                text: "Нужно присвоить ID:"
+            }
+
+            TextField {
+                id: dialogId
+                validator: IntValidator {
+                        bottom: 1
+                        top: 1000000000
+                    }
+            }
+
+            Label {
+                text: "Как поступим?"
+            }
+
+            ComboBox {
+                id: dialogStatus
+                model: ["Доступный","Забронированый","На_продажу"]
+
+            }
+
+            Label {
+                text: "url картинки"
+            }
+
+            TextField {
+                id: dialogImage
+            }
+        }
+
+        onAccepted: {
+            Logic.addPet()
+        }
+    }
+
+    Dialog {
+        id: dialog2
+        title: "Кого изволите найти по id?"
+
+        standardButtons: Dialog.Ok | Dialog.Canscel
+        Column {
+            anchors.fill: parent
+            TextField {
+                id: dialogId2
+                validator: IntValidator {
+                        bottom: 1
+                        top: 1000000000
+                    }
+            }
+
+        }
+
+        onAccepted: {
+            Logic.findPetByID(dialogId2.text)
+        }
+    }
+
+    Dialog {
+        id: dialog3
+        title: "Поменять картинку?"
+
+        standardButtons: Dialog.Ok | Dialog.Canscel
+        Column {
+            anchors.fill: parent
+            TextField {
+                id: dialogId3
+                validator: IntValidator {
+                        bottom: 1
+                        top: 1000000000
+                    }
+                text: listModel.get(swiper.currentIndex).id
+
+            }
+            Label {
+                text: "url картинки"
+            }
+
+            TextField {
+                id: dialogImage2
+            }
+
+        }
+
+        onAccepted: {
+            Logic.updateImage(dialogId3.text)
+            dialogId3.text = ""
+        }
+    }
+
+    MessageDialog {
+        id: messageDialog
+    }
+
 
 }
