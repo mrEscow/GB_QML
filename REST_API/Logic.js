@@ -11,7 +11,7 @@ function getData(url) {
         if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
             if(xmlhttp.status == 200){
                 print("/////////////////////////////")
-                print(xmlhttp.responseText)
+                //print(xmlhttp.responseText)
                 print("/////////////////////////////")
                 parseStaff(xmlhttp.responseText);
             }
@@ -20,7 +20,7 @@ function getData(url) {
                 print(xmlhttp.responseText)
                 print("/////////////////////////////")
             }
-
+        status = xmlhttp.status
         }
     }
 
@@ -50,12 +50,44 @@ function getData(url) {
 
 // Парсинг JSON ответа от сервера и запись значений в ListView
 function parseStaff(response) {
-    var jsonObj = JSON.parse(response);
+    let jsonArr = []
+    jsonArr = JSON.parse(response);
 
-    //    var jsonStaff = jsonObj.staff
-    //    for(var i = 0; i < jsonStaff.length; i++) {
-    //        listview.model.append( {listdata: jsonStaff[i].name +" "+ jsonStaff[i].age + " " + jsonStaff[i].position})
-    //    }
+    jsonArr.forEach(element => {
+                        console.log("element:")
+                        console.log(element)
+                        console.log("name:", element.name)
+                        console.log("id:", element.id)
+                        console.log("status:", element.status)
+                        console.log(element.category.id)
+//                        {
+//                          "id": 0,
+//                          "category": {
+//                            "id": 0,
+//                            "name": "string"
+//                          },
+//                          "name": "doggie",
+//                          "photoUrls": [
+//                            "string"
+//                          ],
+//                          "tags": [
+//                            {
+//                              "id": 0,
+//                              "name": "string"
+//                            }
+//                          ],
+//                          "status": "available"
+//                        }
+                    })
 
-    print(jsonObj)
+//    var pet = jsonObj.pet
+//     print(pet)
+//    for(var i = 0; i < jsonObj.length; i++) {
+//        print(pet[i])
+//        //listview.model.append( {listdata: jsonStaff[i].name +" "+ jsonStaff[i].age + " " + jsonStaff[i].position})
+//    }
+
+    //print(jsonObj)
 }
+
+

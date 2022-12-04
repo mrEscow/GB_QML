@@ -16,14 +16,15 @@ Window {
     //    property string url3: "https://world.openfoodfacts.org/api/v0/product/737628064502.json" //Food
     //    property string url4: "https://api.scripture.api.bible/v1/bibles" //BIBLIA
 
-    //    property string swagger: "https://petstore.swagger.io/v2/"
+    property int status
+        property string swagger: "https://petstore.swagger.io/v2/"
 
     //    // pet
     //    // post
-    //    property string findByStatus: "pet/findByStatus?status="
-    //    property string availableStatus: "available"
-    //    property string pendingStatus: "pending"
-    //    property string soldStatus: "sold"
+        property string findByStatus: "pet/findByStatus?status="
+        property string availableStatus: "available"
+        property string pendingStatus: "pending"
+        property string soldStatus: "sold"
 
     //    TextField {
     //        id: urlPath
@@ -70,7 +71,7 @@ Window {
                         border.color: "grey"
                         Label {
                             anchors.centerIn: parent
-                            text: "200"
+                            text: status
                             font.pixelSize: 1/2 * parent.height//32
                             color: "green"
                             font.bold: true
@@ -276,6 +277,7 @@ Window {
                                     height: parent.height
                                     width: 3/5 * parent.width
                                     color: Qt.lighter(bgColor)
+
                                 }
                                 Rectangle {
                                     radius: 25
@@ -382,6 +384,11 @@ Window {
                 }
             }
         }
+    }
+
+    Component.onCompleted: {
+        const url = swagger + findByStatus + pendingStatus
+        Logic.getData(url)
     }
 
 }
