@@ -5,7 +5,7 @@ function getData(url) {
     // 1. Создать XMLHttpRequest.
     let xmlhttp = new XMLHttpRequest();
 
-    xmlhttp.setRequestHeader("api-key","test");
+    //xmlhttp.setRequestHeader("api-key","test");
 
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
