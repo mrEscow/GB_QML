@@ -565,13 +565,14 @@ Window {
 
             TextField {
                 id: dialogImage2
+                text: ""
             }
 
         }
 
         onAccepted: {
             Logic.updateImage(dialogId3.text)
-            dialogId3.text = ""
+            dialogId3.text = " "
         }
     }
 
