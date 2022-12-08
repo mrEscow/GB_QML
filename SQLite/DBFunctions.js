@@ -26,7 +26,7 @@ function addContact(tx, first_name, last_name, email, phone) {
 
 function readContacts(tx, model) {
 
-    const sql = 'SELECT contact_id, first_name, last_name, email, phone FROM contacts'
+    const sql = 'SELECT contact_id, first_name, last_name, email, phone FROM contacts;'
 
     let result = tx.executeSql(sql)
 
