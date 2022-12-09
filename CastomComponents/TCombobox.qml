@@ -63,12 +63,16 @@ T.ComboBox {
     }
 
     indicator: ColorImage {
+        id: indicatorImage
         x: control.mirrored ? control.padding : control.width - width - control.padding
         y: control.topPadding + (control.availableHeight - height) / 2
         color: control.palette.dark
         defaultColor: "#353637"
         source: "qrc:/qt-project.org/imports/QtQuick/Controls.2/images/double-arrow.png"
         opacity: enabled ? 1 : 0.3
+
+        // my
+        rotation: control.down ? 90 : 0
     }
 
     contentItem: T.TextField {
@@ -133,10 +137,13 @@ T.ComboBox {
             }
 
             T.ScrollIndicator.vertical: ScrollIndicator { }
+
+
         }
 
         background: Rectangle {
             color: control.palette.window
         }
+
     }
 }
