@@ -7,6 +7,12 @@ import QtQuick.Controls 2.12
 
 import "qrc:/JS/DBFunctions.js" as DBFunctions
 
+
+//    Добавьте работу с БД, сделайте переключение между несколькими таблицами в БД, выбор
+//    таблицы сделайте в виде ComboBox, добавьте возможность редактирования значений в
+//    таблице.
+
+
 Window {
     id: mainWindow
     width: 640
@@ -15,6 +21,7 @@ Window {
     title: qsTr("SQLite")
 
     property int cellHorizontalSpacing: 10
+    readonly property int tableDelegatHeight: 50
 
     property var db
 
@@ -30,6 +37,12 @@ Window {
 
     }
 
+    function getRowIndex(x){
+        for(let ix = 0; ix < tableModel.rowCount; ix++){
+            if(x >= (tableDelegatHeight * ix)  &&  x < tableDelegatHeight * (1+ix)) return ix
+        }
+    }
+
     Column {
         anchors.fill: parent
         ComboBox {
@@ -42,7 +55,7 @@ Window {
             id: table
             //anchors.fill: parent
             width: mainWindow.width
-            height: tableModel.rowCount * 50
+            height: tableModel.rowCount * tableDelegatHeight
             columnSpacing: 1
             rowSpacing: 1
             model: tableModel
@@ -51,30 +64,36 @@ Window {
 
 
             delegate: Rectangle {
-                //required property bool selected
-                //required property bool current
+                id: tableDelegat
 
                 implicitWidth: Math.max( 100, /*left*/ cellHorizontalSpacing + innerText.width + /*right*/ cellHorizontalSpacing )
-                implicitHeight: 50
+                implicitHeight: tableDelegatHeight
                 border.width: 1
-
-                //color: selected ? "blue" : "lightgray"
 
                 Text {
                     id: innerText
                     text: display
                     anchors.centerIn: parent
                 }
+            }
 
-                MouseArea {
-                    anchors.fill: parent
+            MouseArea {
+                id: mouse
+                anchors.fill: parent
 
-                    onClicked: console.log("tab:",   )
+                onClicked: {
+                    console.log("tab:", getRowIndex(mouse.y) )
+                    let obj = tableModel.getRow(getRowIndex(mouse.y))
+
+                    console.log(obj.first_name)
+                    console.log(obj.last_name)
+                    console.log(obj.email)
+                    console.log(obj.phone)
                 }
             }
         }
-
     }
+
     Dialog {
         id: dialog
         anchors.centerIn: parent
