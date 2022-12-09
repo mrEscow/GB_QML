@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+    </qresource>
+    <qresource prefix="/JS">
+        <file>DBFunctions.js</file>
+    </qresource>
+</RCC>
