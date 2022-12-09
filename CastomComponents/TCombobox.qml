@@ -43,6 +43,8 @@ import QtQuick.Templates 2.15 as T
 T.ComboBox {
     id: control
 
+    property bool isBoxOpen: false
+
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
                             implicitContentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
@@ -72,7 +74,9 @@ T.ComboBox {
         opacity: enabled ? 1 : 0.3
 
         // my
-        rotation: control.down ? 90 : 0
+        // rotation: control.down ? 90 : 0
+
+
     }
 
     contentItem: T.TextField {
@@ -146,4 +150,23 @@ T.ComboBox {
         }
 
     }
+
+    // my
+    onDownChanged: {
+
+        isBoxOpen = !isBoxOpen
+
+        if(isBoxOpen){
+            indicatorAnimOpen.start()
+        }
+        else{
+            indicatorAnimClose.start()
+        }
+
+    }
+
+    Component.onCompleted: indicatorAnimClose.start()
+
+    PropertyAnimation {id: indicatorAnimOpen; target: indicatorImage; properties: "rotation"; to: 90; duration: 100}
+    PropertyAnimation {id: indicatorAnimClose; target: indicatorImage; properties: "rotation"; to: 0; duration: 100}
 }
