@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>TCombobox.qml</file>
+    </qresource>
+</RCC>
