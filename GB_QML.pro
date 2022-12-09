@@ -1,1 +1,4 @@
 TEMPLATE = subdirs
+
+SUBDIRS += \
+    CastomComponents
