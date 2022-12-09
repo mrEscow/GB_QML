@@ -86,7 +86,6 @@ Window {
                 onClicked: {
                     currentIndex = getRowIndex(mouse.y)
                     rowObj = tableModel.getRow(currentIndex)
-
                     updateDialog.open()
                 }
             }
@@ -173,12 +172,6 @@ Window {
             rowObj.last_name = updateLastName.text
             rowObj.email = updateEmail.text
             rowObj.phone = updatePhone.text
-
-            print(rowObj.contact_id)
-//            print(rowObj.first_name)
-//            print(rowObj.last_name)
-//            print(rowObj.email)
-//            print(rowObj.phone)
 
             try {
                 db.transaction((tx) => { DBFunctions.updateContact(tx, rowObj, currentIndex + 1)})
