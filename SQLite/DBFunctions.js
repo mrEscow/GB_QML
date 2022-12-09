@@ -40,3 +40,16 @@ function readContacts(tx, model) {
                         })
     }
 }
+
+function updateContact(tx, rowObj, currentIndex){
+    const sql = 'UPDATE contacts ' +
+                'SET first_name = ' + "'" + rowObj.first_name + "'" + ',' +
+                    'last_name = ' + "'" + rowObj.last_name + "'" + ',' +
+                    'email = ' + "'" + rowObj.email + "'" + ',' +
+                    'phone = ' + "'" + rowObj.phone + "' " +
+                'WHERE contact_id = ' + "'" + currentIndex + "'";
+
+    print(sql)
+
+    tx.executeSql(sql)
+}

@@ -22,6 +22,8 @@ Window {
 
     property int cellHorizontalSpacing: 10
     readonly property int tableDelegatHeight: 50
+    property int currentIndex
+    property var rowObj
 
     property var db
 
@@ -82,13 +84,10 @@ Window {
                 anchors.fill: parent
 
                 onClicked: {
-                    console.log("tab:", getRowIndex(mouse.y) )
-                    let obj = tableModel.getRow(getRowIndex(mouse.y))
+                    currentIndex = getRowIndex(mouse.y)
+                    rowObj = tableModel.getRow(currentIndex)
 
-                    console.log(obj.first_name)
-                    console.log(obj.last_name)
-                    console.log(obj.email)
-                    console.log(obj.phone)
+                    updateDialog.open()
                 }
             }
         }
@@ -141,6 +140,63 @@ Window {
             }
         }
     }
+
+
+    Dialog {
+        id: updateDialog
+        anchors.centerIn: parent
+        title: "Update person"
+        standardButtons: Dialog.Ok | Dialog.Cancel
+        Column {
+            anchors.fill: parent
+            spacing: 5
+            TextField {
+                id: updateFirstName
+                text: rowObj.first_name
+            }
+            TextField {
+                id: updateLastName
+                text: rowObj.last_name
+            }
+            TextField {
+                id: updateEmail
+                text: rowObj.email
+            }
+            TextField {
+                id: updatePhone
+                text: rowObj.phone
+            }
+        }
+        onAccepted: {
+
+            rowObj.first_name = updateFirstName.text
+            rowObj.last_name = updateLastName.text
+            rowObj.email = updateEmail.text
+            rowObj.phone = updatePhone.text
+
+            print(rowObj.contact_id)
+//            print(rowObj.first_name)
+//            print(rowObj.last_name)
+//            print(rowObj.email)
+//            print(rowObj.phone)
+
+            try {
+                db.transaction((tx) => { DBFunctions.updateContact(tx, rowObj, currentIndex + 1)})
+
+                tableModel.setRow(currentIndex, {
+                                      id: currentIndex,
+                                      first_name: rowObj.first_name,
+                                      last_name: rowObj.last_name,
+                                      email: rowObj.email,
+                                      phone: rowObj.phone
+                                  })
+
+            } catch (err) {
+                console.log("Error creating or updating table in database: " + err)
+            }
+        }
+    }
+
     Button {
         id: button
         text: "Добавить человека"
@@ -172,6 +228,8 @@ Window {
             //                               DBFunctions.addContact(tx, "Молчун", "Дмитрий", "molchyn@mail.ru", "+7(933)9876142")
             //                           })
             db.transaction((tx) => { DBFunctions.readContacts(tx, table.model) })
+
+
 
         } catch (err) {
             console.log("Error creating or updating table in database: " + err)
