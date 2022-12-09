@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
+import QtQuick.Controls 2.15
 
 //    Видоизмените отображение в примере с вложенной моделью (id, name, surname, friends).
 //    Сделайте отображение строки с помощью SwipeView, на первой “странице” отобразите
@@ -25,55 +26,73 @@ Window {
         anchors.fill: parent
         model: mdl
         spacing: 2
-        delegate: Row {
+        delegate: SwipeView {
             width: parent.width
             height: 50
-            spacing: 2
-            //property alias friends: friends
-            Rectangle {
-                width: 70
-                height: parent.height
-                border.width: 1
-                Text{
-                    anchors.centerIn: parent
-                    text: rowId
-                }
-            }
-
-            Rectangle {
-                width: 100
-                height: parent.height
-                border.width: 1
-                Text {
-                    anchors.centerIn: parent
-                    text: name
-                }
-            }
-
-            Rectangle {
-                width: 100
-                height: parent.height
-                border.width: 1
-                Text {
-                    anchors.centerIn: parent
-                    text: surname
-                }
-            }
-
-            Rectangle {
-                width: 150
-                height: parent.height
-                border.width: 1
-                Text {
+            Item {
+                Row {
                     anchors.fill: parent
-                    text: getFriendsText(friends)
-                    wrapMode: Text.WordWrap
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
+                    spacing: 2
+                    //property alias friends: friends
+                    Rectangle {
+                        width: 70
+                        height: parent.height
+                        border.width: 1
+                        Text{
+                            anchors.centerIn: parent
+                            text: rowId
+                        }
+                    }
+
+                    Rectangle {
+                        width: 100
+                        height: parent.height
+                        border.width: 1
+                        Text {
+                            anchors.centerIn: parent
+                            text: name
+                        }
+                    }
+
+                    Rectangle {
+                        width: 100
+                        height: parent.height
+                        border.width: 1
+                        Text {
+                            anchors.centerIn: parent
+                            text: surname
+                        }
+                    }
+
+                    Rectangle {
+                        width: 150
+                        height: parent.height
+                        border.width: 1
+                        Text {
+                            anchors.fill: parent
+                            text: getFriendsText(friends)
+                            wrapMode: Text.WordWrap
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+                    }
+                }
+            }
+            Item {
+                Rectangle {
+                    width: 150
+                    height: parent.height
+                    border.width: 1
+                    Text {
+                        anchors.fill: parent
+                        text: getFriendsText(friends)
+                        wrapMode: Text.WordWrap
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
             }
         }
-
         header: Row {
             width: parent.width
             height: 50
